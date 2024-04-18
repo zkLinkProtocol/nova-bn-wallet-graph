@@ -1,0 +1,79 @@
+type LinkSwapEntity @entity(immutable: false) {
+  id: Bytes!
+  account: Bytes! # address
+  amount0In: BigInt! 
+  amount0Out: BigInt! 
+  amount1In: BigInt! 
+  amount1Out: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  accumulateValue: BigInt!
+}
+
+type IZiSwapPoolEntity @entity(immutable: true) {
+  id: Bytes!
+  tokenX: Bytes! # address
+  tokenY: Bytes! # address
+  fee: Int!
+  sellXEarnY: Boolean!
+  amountX: BigInt!
+  amountY: BigInt!
+  currentPoint: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  account: Bytes! # address
+  verified: Boolean
+}
+
+type LayerBankEntity @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  amount: BigInt! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+
+# enum ZKDXStakingType {
+#   USDT
+#   ETH
+# }
+
+type ZKDXStaking @entity(immutable: true) {
+  id: Bytes!
+  address: Bytes! # address
+  amount: BigInt!
+  type: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+
+type AquaSupplyEntity @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  mintAmount: BigInt!
+  mintTokens: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NativeXSwapEntity @entity(immutable: true) {
+  id: Bytes!
+  recipient: Bytes! # address
+  sellerToken: Bytes! # address
+  buyerToken: Bytes! # address
+  sellerTokenAmount: BigInt!
+  buyerTokenAmount: BigInt!
+  quoteId: Bytes!
+  signer: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+

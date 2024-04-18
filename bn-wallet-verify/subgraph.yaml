@@ -1,0 +1,659 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+
+  - kind: ethereum
+    name: LinkSwapUSDC_ARB
+    network: zklink-nova
+    source:
+      address: "0x381D380B9f2398B8905E1d5EaB6C62309623898B"
+      abi: LinkSwap
+      startBlock: 112235
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+
+  - kind: ethereum
+    name: LinkSwapUSDT_ARB
+    network: zklink-nova
+    source:
+      address: "0x60f9A429356a9CCc8f1F922c020A6178C95238fd"
+      abi: LinkSwap
+      startBlock: 193397
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+
+  - kind: ethereum
+    name: LinkSwapUSDC_ETH
+    network: zklink-nova
+    source:
+      address: "0xf5Fec5df952F6108288aEb463799825d4A8E8b51"
+      abi: LinkSwap
+      startBlock: 224480
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+  
+  - kind: ethereum
+    name: LinkSwapUSDT_ETH
+    network: zklink-nova
+    source:
+      address: "0x4c37D751a3bA4d26cf8edBFb0087E15b95E4675b"
+      abi: LinkSwap
+      startBlock: 264785
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+    
+  - kind: ethereum
+    name: LinkSwapUSDC_ARB1
+    network: zklink-nova
+    source:
+      address: "0x16F9368A101495263E3737EfD5a8F56D061B80Cb"
+      abi: LinkSwap
+      startBlock: 277392
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+
+  - kind: ethereum
+    name: LinkSwapUSDT_MERGE
+    network: zklink-nova
+    source:
+      address: "0x8e5aa41a021495b606F9181B508759a39Ac2c3e4"
+      abi: LinkSwap
+      startBlock: 429574
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+    
+  - kind: ethereum
+    name: LinkSwapUSDC_MERGE
+    network: zklink-nova
+    source:
+      address: "0x4eaDd78a23E152FeC2b63F0f5A3423bDa2207E9b"
+      abi: LinkSwap
+      startBlock: 429527
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LinkSwapEntity
+      abis:
+        - name: LinkSwap
+          file: ./abis/ZKLinkSwap.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleLinkSwap
+      file: ./src/linkSwap.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC_ETH
+    network: zklink-nova
+    source:
+      address: "0x5457c04370c447aed563489d9fe0b1d057439e0b"
+      abi: iZiSwapPool
+      startBlock: 419777
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC.Arbi_ETH
+    network: zklink-nova
+    source:
+      address: "0xd4b701a553005464292e978efd8abc48252a7722"
+      abi: iZiSwapPool
+      startBlock: 6706
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC_USDT
+    network: zklink-nova
+    source:
+      address: "0x19142b9D0077eb776d04a4b42a526dd07409B9Db"
+      abi: iZiSwapPool
+      startBlock: 478005
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+  
+  - kind: ethereum
+    name: iZiSwapUSDT.Arbi_ETH
+    network: zklink-nova
+    source:
+      address: "0xc2909feb6f46e19f2b40f9288ac63726d7c2612c"
+      abi: iZiSwapPool
+      startBlock: 392843
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapETH_USDC.Linea
+    network: zklink-nova
+    source:
+      address: "0x28592307d115f883acc87763803c3679c0d42fb1"
+      abi: iZiSwapPool
+      startBlock: 403
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDT.Eth_ETH
+    network: zklink-nova
+    source:
+      address: "0xe3905d48be8aedb1be57c8ad924c40de7e4fb4ff"
+      abi: iZiSwapPool
+      startBlock: 310208
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDT_ETH
+    network: zklink-nova
+    source:
+      address: "0x062C027E4736F90BB06bA4bfc8036F133fd99413"
+      abi: iZiSwapPool
+      startBlock: 487248
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC.Eth_ETH
+    network: zklink-nova
+    source:
+      address: "0xfa38f432429d59ba653d5746cfea4f734f2c251e"
+      abi: iZiSwapPool
+      startBlock: 156656
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC_ETH2
+    network: zklink-nova
+    source:
+      address: "0x802e9743d3421ce5786bc24aac90bbba404f82dd"
+      abi: iZiSwapPool
+      startBlock: 435556
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: LayerBank
+    network: zklink-nova
+    source:
+      address: "0xb666582F612692525C4027d2a8280Ac06a055a95"
+      abi: LayerBank
+      startBlock: 125975
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LayerBankEntity
+      abis:
+        - name: LayerBank
+          file: ./abis/LayerBank.json
+      eventHandlers:
+        - event: Mint(address,uint256)
+          handler: handleLayerBankSupply
+        - event: Borrow(address,uint256,uint256)
+          handler: handleLayerBankBorrow
+      file: ./src/layerBank.ts
+
+  - kind: ethereum
+    name: ZKDXETH
+    network: zklink-nova
+    source:
+      address: "0xb5e635f2cB9eAC385D679069f8e0d1740436b355"
+      abi: ZKDX
+      startBlock: 266
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ZKDXStaking
+      abis:
+        - name: ZKDX
+          file: ./abis/ZKDXStaking.json
+      eventHandlers:
+        - event: Stake(indexed address,uint256)
+          handler: handleZKDXStakingETH
+      file: ./src/stakingZKDX.ts
+
+  - kind: ethereum
+    name: ZKDXUSDC
+    network: zklink-nova
+    source:
+      address: "0x9292EbD38Ac73EA880199d7ffE0219Eee3Fd49C5"
+      abi: ZKDX
+      startBlock: 60432
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ZKDXStaking
+      abis:
+        - name: ZKDX
+          file: ./abis/ZKDXStaking.json
+      eventHandlers:
+        - event: Stake(indexed address,uint256)
+          handler: handleZKDXStakingUSDC
+      file: ./src/stakingZKDX.ts
+
+  - kind: ethereum
+    name: ZKDXUSDC_NEW
+    network: zklink-nova
+    source:
+      address: "0xa6DbD1bdB1DC4339Df51d90Ce306CCE6edFbbbb1"
+      abi: ZKDX
+      startBlock: 505708
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ZKDXStaking
+      abis:
+        - name: ZKDX
+          file: ./abis/ZKDXStaking.json
+      eventHandlers:
+        - event: Stake(indexed address,uint256)
+          handler: handleZKDXStakingUSDC
+      file: ./src/stakingZKDX.ts
+
+  - kind: ethereum
+    name: NativeXSupply
+    network: zklink-nova
+    source:
+      address: "0xc2be3CC06Ab964f9E22e492414399DC4A58f96D3"
+      abi: NativeX
+      startBlock: 25670
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplyUSDC.ARB
+    network: zklink-nova
+    source:
+      address: "0xf2E73ea408FFb1AE1e6371d068b6e597e468bDeC"
+      abi: NativeX
+      startBlock: 129
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplySTONE.ETH
+    network: zklink-nova
+    source:
+      address: "0x11ac330ef325Be47A9a95B5d5D1357690A7c55F0"
+      abi: NativeX
+      startBlock: 736
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplySTONE.MANTA
+    network: zklink-nova
+    source:
+      address: "0xa5B104E55d42f41cA1dbbb3ee95C62092c04b8f4"
+      abi: NativeX
+      startBlock: 738
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplyUSDC.ETH
+    network: zklink-nova
+    source:
+      address: "0x134E199c494859D456885aD4Df2198c45295267d"
+      abi: NativeX
+      startBlock: 69455
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplyUSDC.e.ARB
+    network: zklink-nova
+    source:
+      address: "0xB48FdeD1FC20D89cac779fC61F159c9B43B06D17"
+      abi: NativeX
+      startBlock: 73034
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+  
+  - kind: ethereum
+    name: NativeXSupplyUSDC.MERGE
+    network: zklink-nova
+    source:
+      address: "0x603871A4DDEA08B9375ff6339E319AE7932b640b"
+      abi: NativeX
+      startBlock: 601388
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplywstETH.ETH
+    network: zklink-nova
+    source:
+      address: "0x26c506C3D071bb5aDc16a6623c3fC8B508EaDAa0"
+      abi: NativeX
+      startBlock: 742
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplywstETH.LINEA  
+    network: zklink-nova
+    source:
+      address: "0x0d3e7e8d54E686d323a190eAac163CF9AAb6d7fd"
+      abi: NativeX
+      startBlock: 744
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSupplywstETH.ARB
+    network: zklink-nova
+    source:
+      address: "0x646fC8D54419742D5b530b92DF77A9e8d6c34D3C"
+      abi: NativeX
+      startBlock: 746
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AquaSupplyEntity
+      abis:
+        - name: NativeX
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleAquaSupply
+      file: ./src/nativeX.ts
+
+  - kind: ethereum
+    name: NativeXSwap
+    network: zklink-nova
+    source:
+      address: "0x4712707F93Ea7544052Cbb2616D9407578cC149b"
+      abi: NativeXSwap
+      startBlock: 760
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NativeXSwapEntity
+      abis:
+        - name: NativeXSwap
+          file: ./abis/NativeX.json
+      eventHandlers:
+        - event: RfqTrade(address,address,address,uint256,uint256,bytes16,address)
+          handler: handleNativeXSwap
+      file: ./src/nativeX.ts
