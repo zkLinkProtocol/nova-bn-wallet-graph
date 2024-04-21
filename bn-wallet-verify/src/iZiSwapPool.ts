@@ -3,6 +3,7 @@ import { Swap }from '../generated/iZiSwapUSDT_ETH/iZiSwapPool'
 import { IZiSwapPoolEntity } from '../generated/schema'
 
 export function handleIZiSwapUSD(event: Swap): void {
+  
   let entity = new IZiSwapPoolEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )

@@ -1,4 +1,4 @@
-import { ByteArray, Bytes, crypto } from '@graphprotocol/graph-ts'
+import { ByteArray, Bytes, crypto ,ethereum } from '@graphprotocol/graph-ts'
 import { Swap as SwapEvent }from '../generated/LinkSwapUSDC_ARB/LinkSwap'
 import { LinkSwapEntity } from '../generated/schema'
 

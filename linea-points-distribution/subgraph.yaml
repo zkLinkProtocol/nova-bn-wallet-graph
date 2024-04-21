@@ -1,0 +1,93 @@
+specVersion: 1.0.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: iZiSwapFactory
+    network: zklink-nova
+    source:
+      abi: iZiSwapFactory
+      address: '0x33D9936b7B7BC155493446B5E6dDC0350EB83AEC'
+      startBlock: 280
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/izumiFactory.ts
+      entities:
+        - Pool
+        - Token
+      abis:
+        - name: iZiSwapFactory
+          file: ./abis/iZiSwapFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: NewPool(indexed address,indexed address,indexed uint24,uint24,address)
+          handler: handleNewPool
+
+  - kind: ethereum
+    name: iZiSwapLiquidityManager
+    network: zklink-nova
+    source:
+      abi: iZiSwapLiquidityManager
+      address: '0x936c9A1B8f88BFDbd5066ad08e5d773BC82EB15F'
+      startBlock: 295
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/izumiLiquidity.ts
+      entities:
+        - UserLatestPosition
+        - Pool
+        - LatestPosition
+        - UserAddresses
+      abis:
+        - name: iZiSwapLiquidityManager
+          file: ./abis/iZiSwapLiquidityManager.json
+        - name: iZiSwapFactory
+          file: ./abis/iZiSwapFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        # - event: Transfer(indexed address,indexed address,indexed uint256)
+        #   handler: handleNftTransfer
+        - event: AddLiquidity(indexed uint256,address,uint128,uint256,uint256)
+          handler: handleAddLiquidity
+        - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
+          handler: handleAddLiquidity
+templates:
+  - kind: ethereum/contract
+    name: Pool
+    network: zklink-nova
+    source:
+      abi: SwapPoolAbi
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/swap.ts
+      entities:
+        - Pool
+      abis:
+        - name: SwapPoolAbi
+          file: ./abis/iZiSwapPool.json
+        - name: Factory
+          file: ./abis/iZiSwapFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed
+            uint24,bool,uint256,uint256,int24)
+          handler: handleSwap
+        # - event: Mint(address,indexed address,indexed int24,indexed
+        #     int24,uint128,uint256,uint256)
+        #   handler: handleMint
+        # - event: Burn(indexed address,indexed int24,indexed int24,uint128,uint256,uint256)
+        #   handler: handleBurn
+        #   receipt: true

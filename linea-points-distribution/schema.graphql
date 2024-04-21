@@ -1,0 +1,70 @@
+type Token @entity {
+  # token address
+  id: Bytes!
+  # token symbol
+  symbol: String!
+  # token name
+  name: String!
+  # token decimals
+  decimals: BigInt!
+}
+
+type Pool @entity(immutable: false) {
+  # pool address
+  id: Bytes!
+  # tokeX
+  tokenX: Token!
+  # tokenY
+  tokenY: Token!
+  # tokenX amount
+  amountX: BigInt!
+  # tokenY amount
+  amountY: BigInt!
+  # update timestamp
+  blockTimestamp: BigInt!
+  # update blocknumber
+  blockNumber: BigInt!
+  # update tx
+  transactionHash: Bytes!
+}
+
+enum TransferType {
+  Add
+  Remove
+}
+
+type TransferActivity @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes!
+  type: TransferType!
+  token: Bytes!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Position @entity(immutable: false) {
+  # user account + token address + poolId
+  id: Bytes!
+  # token address
+  token: Bytes!
+  # amount
+  amount: BigInt!
+  # token share balance
+  shareBalance: BigInt!
+  # pool Address
+  pool: Bytes!
+  # user account
+  user: UserPosition!
+}
+
+type UserPosition @entity(immutable: false) {
+  id: Bytes! # account
+  positions: [Position!]! @derivedFrom(field: "user")
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+
