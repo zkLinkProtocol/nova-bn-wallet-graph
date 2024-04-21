@@ -61,16 +61,20 @@ The total balance locked in pool should be sum by the following pool
 ## Project - LayerBank
 
 > Tx with these two contract:
-> `0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959``0xb666582F612692525C4027d2a8280Ac06a055a95`
+
+- Core `0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959` 
+- LToken `0xb666582F612692525C4027d2a8280Ac06a055a95` ETH
 
 ### **All type of transactions as below**
+
+MarketListed
 
 | Action   | TX sample                                                          | Share change | Event        |
 | -------- | ------------------------------------------------------------------ | ------------ | ------------ |
 | supply   | 0x00183e47e959ae59de282077ad2ce0b00e8699d74bc47e92506190292b72244a | &check;      | MarketSupply |
 | withdraw | 0x76c1a783baa9287ba9e2d997b28548324e29d3b9bfc0cdc4f71cb915d4d3b452 | &check;      | MarketRedeem |
-| borrow   | 0x3919e36bca90e165fc264b88ae23fb663e5340ec2368b70b826eb669ce87bec3 | x            |              |
-| repay    | 0x3e889f21ba6a11adcb536200e00b6c3055a76b5b02634bae38ab73a0eca49c7f | x            |              |
+| borrow   | 0x3919e36bca90e165fc264b88ae23fb663e5340ec2368b70b826eb669ce87bec3 | x            | Borrow       |
+| repay    | 0x3e889f21ba6a11adcb536200e00b6c3055a76b5b02634bae38ab73a0eca49c7f | x            | RepayBorrow  |
 
 ## Project - LinkSwap ⏰
 

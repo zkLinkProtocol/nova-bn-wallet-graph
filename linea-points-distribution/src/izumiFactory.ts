@@ -3,7 +3,7 @@ import {  NewPool } from '../generated/iZiSwapFactory/iZiSwapFactory';
 import { Pool, Token } from '../generated/schema';
 import { ADDRESS_ZERO } from './constants';
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from './utils/tokenHelper';
-import {Pool as PoolTemplate} from '../generated/templates'
+import { Pool as PoolTemplate } from '../generated/templates'
 
 
 export function handleNewPool(event: NewPool): void {
@@ -31,7 +31,7 @@ export function handleNewPool(event: NewPool): void {
 
 function getOrCreateTokenEntity(tokenAddress: Address): Token | null {
     let token = Token.load(tokenAddress);
-    
+
     if (token === null) {
         token = new Token(tokenAddress);
 

@@ -61,6 +61,35 @@ dataSources:
           handler: handleAddLiquidity
         - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
           handler: handleAddLiquidity
+
+  - kind: ethereum
+    name: layerBank
+    network: zklink-nova
+    source:
+      abi: layerBankCore
+      address: '0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959'
+      startBlock: 125957
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/layerBank.ts
+      entities:
+        - LayerBankMarket
+      abis:
+        - name: layerBankCore
+          file: ./abis/LayerBankCore.json
+        - name: LayerBankLToken
+          file: ./abis/LayerBankLToken.json
+      eventHandlers:
+        - event: MarketListed(address)
+          handler: handleMarketListed
+        - event: MarketRedeem(address,address,uint256)
+          handler: handleMarketRedeem
+        - event: MarketSupply(address,address,uint256)
+          handler: handleMarketSupply
+
+# izumi dynamic pool  
 templates:
   - kind: ethereum/contract
     name: Pool
@@ -85,9 +114,3 @@ templates:
         - event: Swap(indexed address,indexed address,indexed
             uint24,bool,uint256,uint256,int24)
           handler: handleSwap
-        # - event: Mint(address,indexed address,indexed int24,indexed
-        #     int24,uint128,uint256,uint256)
-        #   handler: handleMint
-        # - event: Burn(indexed address,indexed int24,indexed int24,uint128,uint256,uint256)
-        #   handler: handleBurn
-        #   receipt: true
