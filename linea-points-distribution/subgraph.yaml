@@ -118,10 +118,6 @@ dataSources:
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
-        # - event: MarketRedeem(address,address,uint256)
-        #   handler: handleMarketRedeem
-        # - event: MarketSupply(address,address,uint256)
-        #   handler: handleMarketSupply
 
 # izumi dynamic pool
 templates:
