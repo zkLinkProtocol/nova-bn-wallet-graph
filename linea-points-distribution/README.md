@@ -62,8 +62,8 @@ The total balance locked in pool should be sum by the following pool
 
 > Tx with these two contract:
 
-- Core `0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959` 
-- LToken `0xb666582F612692525C4027d2a8280Ac06a055a95` ETH
+- Core `0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959`
+- LToken `0xb666582F612692525C4027d2a8280Ac06a055a95`
 
 ### **All type of transactions as below**
 
@@ -78,7 +78,10 @@ MarketListed
 
 ## Project - LinkSwap ⏰
 
-The contract address of SwapRouter is `0x3D31943303aC09F2B97DF88b61c70eF00B732EA8`, which interacts with users for swap transactions.
+The contract address
+
+- SwapFactory `0x87929083ac2215cF3CE4936857D314aF6687C978`
+- SwapRouter `0x3D31943303aC09F2B97DF88b61c70eF00B732EA8`, which interacts with users for swap transactions.
 
 The sample of add/remove liquidity on LP `0x4eaDd78a23E152FeC2b63F0f5A3423bDa2207E9b`(tx: `0x680eae567411fa33e25c20a86c25b686bb5783cbc20ed121e86595a8b5bdbbb6`, `0x0a9cb596b7b25e91c510028a854345c5bf550efcd1d893a78611458b9ea6435f`), _transfer_ event occurred on the contract address `0x3D31943303aC09F2B97DF88b61c70eF00B732EA8`, The ETH was transferred between _SwapRouter_ and _EOA_ address, we can leverage this to accumulate/reduce the share of LP.
 

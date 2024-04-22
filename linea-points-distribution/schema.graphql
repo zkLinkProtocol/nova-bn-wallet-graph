@@ -74,5 +74,3 @@ type LayerBankMarket @entity(immutable: false) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
-
-

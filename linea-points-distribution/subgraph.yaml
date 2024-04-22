@@ -62,7 +62,6 @@ dataSources:
         - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
           handler: handleAddLiquidity
 
-
   - kind: ethereum
     name: layerBank
     network: zklink-nova
@@ -94,7 +93,37 @@ dataSources:
         - event: MarketSupply(address,address,uint256)
           handler: handleMarketSupply
 
-# izumi dynamic pool  
+  - kind: ethereum
+    name: linkswapFactory
+    network: zklink-nova
+    source:
+      abi: linkswapFactory
+      address: '0x87929083ac2215cF3CE4936857D314aF6687C978'
+      startBlock: 79192
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/linkswap.ts
+      entities:
+        - Pool
+        - Token
+      abis:
+        - name: linkswapFactory
+          file: ./abis/LinkswapFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handlePairCreated
+        # - event: MarketRedeem(address,address,uint256)
+        #   handler: handleMarketRedeem
+        # - event: MarketSupply(address,address,uint256)
+        #   handler: handleMarketSupply
+
+# izumi dynamic pool
 templates:
   - kind: ethereum/contract
     name: Pool
@@ -119,3 +148,29 @@ templates:
         - event: Swap(indexed address,indexed address,indexed
             uint24,bool,uint256,uint256,int24)
           handler: handleSwap
+
+  - kind: ethereum/contract
+    name: LinkSwap
+    network: zklink-nova
+    source:
+      abi: SwapPair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/linkswap.ts
+      entities:
+        - Pool
+        - Position
+      abis:
+        - name: Factory
+          file: ./abis/LinkswapFactory.json
+        - name: SwapPair
+          file: ./abis/LinkswapISwapPair.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: handleBurn
