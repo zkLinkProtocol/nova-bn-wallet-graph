@@ -41,9 +41,9 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/izumiLiquidity.ts
       entities:
-        - UserLatestPosition
+        - UserPosition
         - Pool
-        - LatestPosition
+        - Position
         - UserAddresses
       abis:
         - name: iZiSwapLiquidityManager
@@ -62,13 +62,14 @@ dataSources:
         - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
           handler: handleAddLiquidity
 
+
   - kind: ethereum
     name: layerBank
     network: zklink-nova
     source:
       abi: layerBankCore
       address: '0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959'
-      startBlock: 125957
+      startBlock: 125988
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -76,11 +77,15 @@ dataSources:
       file: ./src/layerBank.ts
       entities:
         - LayerBankMarket
+        - UserPosition
+        - Position
       abis:
         - name: layerBankCore
           file: ./abis/LayerBankCore.json
         - name: LayerBankLToken
           file: ./abis/LayerBankLToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: MarketListed(address)
           handler: handleMarketListed

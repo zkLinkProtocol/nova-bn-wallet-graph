@@ -67,4 +67,12 @@ type UserPosition @entity(immutable: false) {
   transactionHash: Bytes!
 }
 
+type LayerBankMarket @entity(immutable: false) {
+  id: Bytes! # account
+  supply: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 

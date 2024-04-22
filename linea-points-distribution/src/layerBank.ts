@@ -1,16 +1,15 @@
-import { MarketListed, MarketRedeem, MarketSupply} from '../generated/layerBank/layerBankCore'
+import { MarketListed, MarketRedeem, MarketSupply } from '../generated/layerBank/layerBankCore'
+import { LayerBankLToken } from '../generated/layerBank/LayerBankLToken'
 import { LayerBankMarket, Position, UserPosition } from '../generated/schema'
 
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
-import { ERC20 } from '../generated/iZiSwapFactory/ERC20';
-
-const ETH_ADDRESS = Bytes.fromHexString('0x000000000000000000000000000000000000800A')
-const ETH_POOL_ADDRESS = Bytes.fromHexString('0xb666582F612692525C4027d2a8280Ac06a055a95')
+import { BigInt } from '@graphprotocol/graph-ts';
 
 export function handleMarketListed(event: MarketListed ): void {
     const market = new LayerBankMarket(event.params.gToken)
     market.supply = BigInt.zero()
-
+    market.blockNumber = event.block.number
+    market.blockTimestamp = event.block.timestamp
+    market.transactionHash = event.transaction.hash
     market.save()
 }
 
@@ -30,21 +29,22 @@ export function handleMarketRedeem(event: MarketRedeem): void {
     userPosition.transactionHash = event.transaction.hash
     userPosition.save()
 
-    const positionId = event.transaction.from.concat(ETH_POOL_ADDRESS).concat(event.params.gToken)
-  let position = Position.load(positionId)
-  if (!position) {
-    position = new Position(positionId)
-    position.amount = event.params.uAmount
-  } else {
-    position.amount = position.amount.plus(event.params.uAmount)
-  }
-  const poolUnderlyingContract = ERC20.bind(Address.fromBytes(ETH_ADDRESS))
-  const poolUnderlyingBalance = poolUnderlyingContract.try_balanceOf(event.params.gToken)
-  position.shareBalance = position.amount.times(poolUnderlyingBalance.value).div(market.supply)
-  position.pool = event.params.gToken
-  position.token = ETH_ADDRESS
-  position.user = event.transaction.from
-  position.save()
+    const LToken = LayerBankLToken.bind(event.params.gToken)
+    const underlyingToken= LToken.underlying()
+    const underlyingTotalBalance = LToken.getCash()
+    const underlyingBalance = LToken.underlyingBalanceOf(event.params.user)
+    
+    const positionId = event.transaction.from.concat(underlyingToken).concat(event.params.gToken)
+    let position = Position.load(positionId)
+    if (!position) {
+        position = new Position(positionId)
+    } 
+    position.amount = underlyingBalance
+    position.shareBalance = position.amount.times(underlyingTotalBalance).div(market.supply)
+    position.pool = event.params.gToken
+    position.token = underlyingToken
+    position.user = event.transaction.from
+    position.save()
 }
 
 export function handleMarketSupply(event: MarketSupply): void {
@@ -64,19 +64,20 @@ export function handleMarketSupply(event: MarketSupply): void {
     userPosition.transactionHash = event.transaction.hash
     userPosition.save()
 
-    const positionId = event.transaction.from.concat(ETH_POOL_ADDRESS).concat(event.params.gToken)
+    const LToken = LayerBankLToken.bind(event.params.gToken)
+    const underlyingToken= LToken.underlying()
+    const underlyingTotalBalance = LToken.getCash()
+    const underlyingBalance = LToken.underlyingBalanceOf(event.params.user)
+    
+    const positionId = event.transaction.from.concat(underlyingToken).concat(event.params.gToken)
     let position = Position.load(positionId)
     if (!position) {
         position = new Position(positionId)
-        position.amount = event.params.uAmount
-    } else {
-        position.amount = position.amount.plus(event.params.uAmount)
-    }
-    const poolUnderlyingContract = ERC20.bind(Address.fromBytes(ETH_ADDRESS))
-    const poolUnderlyingBalance = poolUnderlyingContract.try_balanceOf(event.params.gToken)
-    position.shareBalance = position.amount.times(poolUnderlyingBalance.value).div(market.supply)
+    } 
+    position.amount = underlyingBalance
+    position.shareBalance = position.amount.times(underlyingTotalBalance).div(market.supply)
     position.pool = event.params.gToken
-    position.token = ETH_ADDRESS
+    position.token = underlyingToken
     position.user = event.transaction.from
     position.save()
 }
