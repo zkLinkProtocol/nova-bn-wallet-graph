@@ -119,6 +119,31 @@ dataSources:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
 
+  - kind: ethereum
+    name: Aqua
+    network: zklink-nova
+    source:
+      abi: AquaLpToken
+      address: '0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5'
+      startBlock: 727
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - AquaMarket
+        - Position
+        - UserPosition
+      abis:
+        - name: AquaLpToken
+          file: ./abis/CErc20.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleSupply
+        - event: Redeem(address,uint256,uint256)
+          handler: handleWithdraw
+
 # izumi dynamic pool
 templates:
   - kind: ethereum/contract

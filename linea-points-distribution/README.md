@@ -209,7 +209,9 @@ event Burn(
 
 ## Project - Aqua
 
-The AQ-LP-ETH token is `0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5`, transferring the LP token between users and this contract can be used for detecting supply and withdraw
+0xE0dC68AE19D82b3b56BCbfe8e022F04da17A3e7B AquaLpToken implement contracts
+
+The AQ-LP-ETH token is `0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5`
 
 ## Project - NativeX
 
