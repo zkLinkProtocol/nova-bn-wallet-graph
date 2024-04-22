@@ -24,7 +24,7 @@ function increasePosition(event: AddLiquidity): void {
   poolEntity.blockTimestamp = event.block.timestamp
   poolEntity.transactionHash = event.transaction.hash
   poolEntity.save()
-  
+
   // genOrUpdateAddress(event.transaction.from)
   // update tokenX
   const positionXId = event.transaction.from.concat(poolEntity.tokenX).concat(event.params.pool)
@@ -62,13 +62,13 @@ function decreasePosition(event: DecLiquidity): void {
   if (!poolEntity) return
   const poolTokenXBalance = fetchTokenBalanceAmount(poolEntity.tokenX.toHexString(), poolEntity.id.toHexString())
   const poolTokenYBalance = fetchTokenBalanceAmount(poolEntity.tokenY.toHexString(), poolEntity.id.toHexString())
-  poolEntity.amountX = poolEntity.amountX.plus(event.params.amountX)
-  poolEntity.amountY = poolEntity.amountY.plus(event.params.amountY)
+  poolEntity.amountX = poolEntity.amountX.minus(event.params.amountX)
+  poolEntity.amountY = poolEntity.amountY.minus(event.params.amountY)
   poolEntity.blockNumber = event.block.number
   poolEntity.blockTimestamp = event.block.timestamp
   poolEntity.transactionHash = event.transaction.hash
   poolEntity.save()
-  
+
   // update tokenX
   const positionXId = event.transaction.from.concat(poolEntity.tokenX).concat(event.params.pool)
   let positionX = Position.load(positionXId)
@@ -101,7 +101,7 @@ function decreasePosition(event: DecLiquidity): void {
 }
 
 
-function genOrUpdateUserLatestPositionByAddLiquidity(event: AddLiquidity):void {
+function genOrUpdateUserLatestPositionByAddLiquidity(event: AddLiquidity): void {
   let userPosition = UserPosition.load(event.transaction.from)
   if (!userPosition) {
     userPosition = new UserPosition(
@@ -115,7 +115,7 @@ function genOrUpdateUserLatestPositionByAddLiquidity(event: AddLiquidity):void {
   userPosition.save()
 }
 
-function genOrUpdateUserLatestPositionByDecLiquidity(event: DecLiquidity):void  {
+function genOrUpdateUserLatestPositionByDecLiquidity(event: DecLiquidity): void {
   let userPosition = UserPosition.load(event.transaction.from)
   if (!userPosition) {
     userPosition = new UserPosition(
