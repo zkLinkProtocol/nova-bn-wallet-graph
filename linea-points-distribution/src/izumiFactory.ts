@@ -1,14 +1,13 @@
 import { log, Address, BigInt } from '@graphprotocol/graph-ts';
-import {  NewPool } from '../generated/iZiSwapFactory/iZiSwapFactory';
+import { NewPool } from '../generated/iZiSwapFactory/iZiSwapFactory';
 import { Pool, Token } from '../generated/schema';
 import { ADDRESS_ZERO } from './constants';
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from './utils/tokenHelper';
-import { Pool as PoolTemplate } from '../generated/templates'
 
 
 export function handleNewPool(event: NewPool): void {
     const pool = new Pool(event.params.pool)
-    
+
     const tokenX = getOrCreateTokenEntity(event.params.tokenX);
     if (tokenX === null) return;
 
@@ -23,9 +22,8 @@ export function handleNewPool(event: NewPool): void {
     pool.tokenX = tokenX.id;
     pool.tokenY = tokenY.id;
 
-    PoolTemplate.create(event.params.pool)
     pool.save();
-    
+
 
 }
 

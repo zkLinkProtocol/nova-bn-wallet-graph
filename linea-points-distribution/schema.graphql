@@ -44,27 +44,37 @@ type TransferActivity @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Position @entity(immutable: false) {
+type PoolTokenPosition @entity(immutable: false) {
   # user account + token address + poolId
   id: Bytes!
   # token address
   token: Bytes!
-  # amount
-  amount: BigInt!
-  # token share balance
-  shareBalance: BigInt!
   # pool Address
   pool: Bytes!
+  # total supply amount by user (used to calc the shared balance)
+  amount: BigInt!
+  # shared balance
+  sharedBalance: BigInt!
   # user account
-  user: UserPosition!
+  tokenPosition: TokenPosition!
+}
+
+type TokenPosition @entity(immutable: false) {
+  # user account + token address
+  id: Bytes!
+  # token address
+  token: Bytes!
+  # all related pool Position ,used to calculate the share balance
+  poolPositions: [PoolTokenPosition!]! @derivedFrom(field: "tokenPosition")
+  # token balance (UserPosition token total balance = balance + poolPositions shared balance)
+  balance: BigInt!
+  # user account
+  userPosition: UserPosition!
 }
 
 type UserPosition @entity(immutable: false) {
   id: Bytes! # account
-  positions: [Position!]! @derivedFrom(field: "user")
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  tokenPositions: [TokenPosition!]! @derivedFrom(field: "userPosition")
 }
 
 type LayerBankMarket @entity(immutable: false) {
