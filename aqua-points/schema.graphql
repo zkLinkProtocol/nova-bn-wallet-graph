@@ -19,6 +19,8 @@ type TokenPosition @entity(immutable: false) {
   id: Bytes!
   # underlying token address
   token: Bytes!
+  # pool address
+  pool: Bytes!
   # underlying balance
   balance: BigInt!
   # underlying token decimal
@@ -29,9 +31,4 @@ type TokenPosition @entity(immutable: false) {
   transactionHash: Bytes!
   # block number
   blockNumber: BigInt!
-}
-
-type Test @entity(immutable: true) {
-  # user account + token address
-  id: Bytes!
 }

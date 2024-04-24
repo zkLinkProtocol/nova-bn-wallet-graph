@@ -8,18 +8,22 @@ import { fetchTokenBalanceAmount, fetchTokenDecimals } from './utils/tokenHelper
 export function handleTransfer(event: Transfer): void {
 
 
-    // update from
+    // update from to
     if (event.params.from.notEqual(event.address)) {
-        updateTokenPosition(event.address, event.params.from, event.block.hash, event.block.number)
+        updateTokenPosition('from', event)
     }
 
     // update to address
     if (event.params.to.notEqual(event.address)) {
-        updateTokenPosition(event.address, event.params.to, event.block.hash, event.block.number)
+        updateTokenPosition('to', event)
     }
 }
 
-function updateTokenPosition(pool: Address, user: Address, hash: Bytes, blockNumber: BigInt): void {
+function updateTokenPosition(type: string, event: Transfer): void {
+    const user = type === 'from' ? event.params.from : event.params.to
+    const pool = event.address
+    const hash = event.transaction.hash
+    const blockNumber = event.block.number
 
     let userPosition = UserPosition.load(user)
     if (!userPosition) {
@@ -29,12 +33,12 @@ function updateTokenPosition(pool: Address, user: Address, hash: Bytes, blockNum
 
     const aquaVault = AquaVault.bind(pool)
     const underlying = aquaVault.underlying()
-    const totalBalance = fetchTokenBalanceAmount(underlying.toHexString(), pool.toHexString())
+    const totalBalance = fetchTokenBalanceAmount(underlying.toHexString(), '0x4AC97E2727B0e92AE32F5796b97b7f98dc47F059') // hardcode 
     const decimal = fetchTokenDecimals(underlying)
 
     const totalSupplied = aquaVault.totalSupply()
     const supplied = aquaVault.balanceOf(user)
-    const balance = supplied.times(totalBalance).div(totalSupplied)
+    const balance = totalSupplied.equals(BigInt.zero()) ? BigInt.zero() : supplied.times(totalBalance).div(totalSupplied)
 
     const tokenPositionId = user.concat(Address.fromHexString(underlying.toHexString()))
 
@@ -45,6 +49,7 @@ function updateTokenPosition(pool: Address, user: Address, hash: Bytes, blockNum
         tokenPosition = new TokenPosition(user.concat(underlying))
     }
     tokenPosition.token = underlying
+    tokenPosition.pool = pool
     tokenPosition.balance = balance
     tokenPosition.decimal = decimal
     tokenPosition.userPosition = userPosition.id
