@@ -1,7 +1,17 @@
-import { Borrow, Mint} from '../generated/LayerBank/LayerBank'
-import { LayerBankEntity} from '../generated/schema'
+import { BigInt } from '@graphprotocol/graph-ts'
+import { Borrow, Mint } from '../generated/LayerBank/LayerBank'
+import { LayerBankEntity } from '../generated/schema'
+import { END_TIME, START_TIME } from './constant'
 
 export function handleLayerBankSupply(event: Mint): void {
+  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+    return
+  }
+
+  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+    return
+  }
+
   let entity = new LayerBankEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
@@ -16,6 +26,14 @@ export function handleLayerBankSupply(event: Mint): void {
 
 
 export function handleLayerBankBorrow(event: Borrow): void {
+  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+    return
+  }
+
+  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+    return
+  }
+
   let entity = new LayerBankEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
@@ -27,4 +45,3 @@ export function handleLayerBankBorrow(event: Borrow): void {
 
   entity.save()
 }
-  

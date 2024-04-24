@@ -1,14 +1,22 @@
 import { BigInt } from '@graphprotocol/graph-ts';
-import { Swap }from '../generated/iZiSwapUSDT_ETH/iZiSwapPool'
+import { Swap } from '../generated/iZiSwapUSDT_ETH/iZiSwapPool'
 import { IZiSwapPoolEntity } from '../generated/schema'
+import { START_TIME, END_TIME } from './constant';
 
 export function handleIZiSwapUSD(event: Swap): void {
-  
+  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+    return
+  }
+
+  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+    return
+  }
+
   let entity = new IZiSwapPoolEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
 
-  const usdValue = event.params.amountX.lt(event.params.amountY) ? event.params.amountX : event.params.amountY 
+  const usdValue = event.params.amountX.lt(event.params.amountY) ? event.params.amountX : event.params.amountY
   entity.account = event.transaction.from
   entity.tokenX = event.params.tokenX
   entity.tokenY = event.params.tokenY

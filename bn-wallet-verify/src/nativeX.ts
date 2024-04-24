@@ -1,10 +1,19 @@
-import { Address } from '@graphprotocol/graph-ts'
-import { Mint, RfqTrade }from '../generated/NativeXSupply/NativeX'
+import { Address, BigInt } from '@graphprotocol/graph-ts'
+import { Mint, RfqTrade } from '../generated/NativeXSupply/NativeX'
 import { AquaSupplyEntity, NativeXSwapEntity } from '../generated/schema'
+import { END_TIME, START_TIME } from './constant'
 
 
 
 export function handleAquaSupply(event: Mint): void {
+  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+    return
+  }
+
+  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+    return
+  }
+
   let entity = new AquaSupplyEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
@@ -27,13 +36,21 @@ const USDT_ARB = Address.fromString('0x012726F9f458a63f86055b24E67BA0aa26505028'
 const supported_assets = [ARB_ARB, MANTA, STONE_MANTA, WSTETH_ETH, USDT_ARB]
 
 export function handleNativeXSwap(event: RfqTrade): void {
+  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+    return
+  }
+
+  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+    return
+  }
+
   let entity = new NativeXSwapEntity(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  const buyerToken =  event.params.buyerToken
+  const buyerToken = event.params.buyerToken
   const sellerToken = event.params.sellerToken
 
-  if(supported_assets.includes(buyerToken) || supported_assets.includes(sellerToken)) {
+  if (supported_assets.includes(buyerToken) || supported_assets.includes(sellerToken)) {
     entity.buyerToken = event.params.buyerToken
     entity.buyerTokenAmount = event.params.buyerTokenAmount
     entity.sellerToken = event.params.sellerToken
@@ -49,4 +66,3 @@ export function handleNativeXSwap(event: RfqTrade): void {
   }
 }
 
-  
