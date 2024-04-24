@@ -1,0 +1,731 @@
+[
+  {
+    "type": "function",
+    "name": "_borrowGuardianPaused",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "_mintGuardianPaused",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "_setBorrowCapGuardian",
+    "inputs": [{ "name": "newBorrowCapGuardian", "type": "address", "internalType": "address" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setBorrowPaused",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "contract CToken" },
+      { "name": "state", "type": "bool", "internalType": "bool" }
+    ],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setCloseFactor",
+    "inputs": [{ "name": "newCloseFactorMantissa", "type": "uint256", "internalType": "uint256" }],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setCollateralFactor",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "contract CToken" },
+      { "name": "newCollateralFactorMantissa", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setLiquidationIncentive",
+    "inputs": [
+      { "name": "newLiquidationIncentiveMantissa", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setMarketBorrowCaps",
+    "inputs": [
+      { "name": "cTokens", "type": "address[]", "internalType": "contract CToken[]" },
+      { "name": "newBorrowCaps", "type": "uint256[]", "internalType": "uint256[]" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setMintPaused",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "contract CToken" },
+      { "name": "state", "type": "bool", "internalType": "bool" }
+    ],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setPauseGuardian",
+    "inputs": [{ "name": "newPauseGuardian", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setPriceOracle",
+    "inputs": [{ "name": "newOracle", "type": "address", "internalType": "contract PriceOracle" }],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setRedeemPaused",
+    "inputs": [{ "name": "state", "type": "bool", "internalType": "bool" }],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_setSeizePaused",
+    "inputs": [{ "name": "state", "type": "bool", "internalType": "bool" }],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "accountAssets",
+    "inputs": [
+      { "name": "", "type": "address", "internalType": "address" },
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "address", "internalType": "contract CToken" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "admin",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "allMarkets",
+    "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "outputs": [{ "name": "", "type": "address", "internalType": "contract CToken" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "borrowAllowed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "borrowAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "borrowCapGuardian",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "borrowCaps",
+    "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "borrowGuardianPaused",
+    "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "borrowVerify",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "borrowAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "checkMembership",
+    "inputs": [
+      { "name": "account", "type": "address", "internalType": "address" },
+      { "name": "cToken", "type": "address", "internalType": "contract CToken" }
+    ],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "closeFactorMantissa",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "comptrollerImplementation",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "enterMarkets",
+    "inputs": [{ "name": "cTokens", "type": "address[]", "internalType": "address[]" }],
+    "outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "exitMarket",
+    "inputs": [{ "name": "cTokenAddress", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "getAccountLiquidity",
+    "inputs": [{ "name": "account", "type": "address", "internalType": "address" }],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getAllMarkets",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address[]", "internalType": "contract CToken[]" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getAssetsIn",
+    "inputs": [{ "name": "account", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "address[]", "internalType": "contract CToken[]" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getBlockTimestamp",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getHypotheticalAccountLiquidity",
+    "inputs": [
+      { "name": "account", "type": "address", "internalType": "address" },
+      { "name": "cTokenModify", "type": "address", "internalType": "address" },
+      { "name": "redeemTokens", "type": "uint256", "internalType": "uint256" },
+      { "name": "borrowAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isComptroller",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isDeprecated",
+    "inputs": [{ "name": "cToken", "type": "address", "internalType": "contract CToken" }],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "liquidateBorrowAllowed",
+    "inputs": [
+      { "name": "cTokenBorrowed", "type": "address", "internalType": "address" },
+      { "name": "cTokenCollateral", "type": "address", "internalType": "address" },
+      { "name": "liquidator", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "repayAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "liquidateBorrowVerify",
+    "inputs": [
+      { "name": "cTokenBorrowed", "type": "address", "internalType": "address" },
+      { "name": "cTokenCollateral", "type": "address", "internalType": "address" },
+      { "name": "liquidator", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "actualRepayAmount", "type": "uint256", "internalType": "uint256" },
+      { "name": "seizeTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "liquidateCalculateSeizeTokens",
+    "inputs": [
+      { "name": "cTokenBorrowed", "type": "address", "internalType": "address" },
+      { "name": "cTokenCollateral", "type": "address", "internalType": "address" },
+      { "name": "actualRepayAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "liquidationIncentiveMantissa",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "markets",
+    "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "outputs": [
+      { "name": "isListed", "type": "bool", "internalType": "bool" },
+      { "name": "collateralFactorMantissa", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "maxAssets",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "mintAllowed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "minter", "type": "address", "internalType": "address" },
+      { "name": "mintAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "mintGuardianPaused",
+    "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "mintVerify",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "minter", "type": "address", "internalType": "address" },
+      { "name": "actualMintAmount", "type": "uint256", "internalType": "uint256" },
+      { "name": "mintTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "oracle",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "contract PriceOracle" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pauseGuardian",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingAdmin",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingComptrollerImplementation",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "redeemAllowed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "redeemer", "type": "address", "internalType": "address" },
+      { "name": "redeemTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "redeemGuardianPaused",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "redeemVerify",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "redeemer", "type": "address", "internalType": "address" },
+      { "name": "redeemAmount", "type": "uint256", "internalType": "uint256" },
+      { "name": "redeemTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "repayBorrowAllowed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "payer", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "repayAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "repayBorrowVerify",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "payer", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "actualRepayAmount", "type": "uint256", "internalType": "uint256" },
+      { "name": "borrowerIndex", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "seizeAllowed",
+    "inputs": [
+      { "name": "cTokenCollateral", "type": "address", "internalType": "address" },
+      { "name": "cTokenBorrowed", "type": "address", "internalType": "address" },
+      { "name": "liquidator", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "seizeTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "seizeGuardianPaused",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "seizeVerify",
+    "inputs": [
+      { "name": "cTokenCollateral", "type": "address", "internalType": "address" },
+      { "name": "cTokenBorrowed", "type": "address", "internalType": "address" },
+      { "name": "liquidator", "type": "address", "internalType": "address" },
+      { "name": "borrower", "type": "address", "internalType": "address" },
+      { "name": "seizeTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "transferAllowed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "src", "type": "address", "internalType": "address" },
+      { "name": "dst", "type": "address", "internalType": "address" },
+      { "name": "transferTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "transferVerify",
+    "inputs": [
+      { "name": "cToken", "type": "address", "internalType": "address" },
+      { "name": "src", "type": "address", "internalType": "address" },
+      { "name": "dst", "type": "address", "internalType": "address" },
+      { "name": "transferTokens", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "ActionPaused",
+    "inputs": [
+      { "name": "action", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "pauseState", "type": "bool", "indexed": false, "internalType": "bool" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ActionPaused",
+    "inputs": [
+      {
+        "name": "cToken",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract CToken"
+      },
+      { "name": "action", "type": "string", "indexed": false, "internalType": "string" },
+      { "name": "pauseState", "type": "bool", "indexed": false, "internalType": "bool" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Failure",
+    "inputs": [
+      { "name": "error", "type": "uint256", "indexed": false, "internalType": "uint256" },
+      { "name": "info", "type": "uint256", "indexed": false, "internalType": "uint256" },
+      { "name": "detail", "type": "uint256", "indexed": false, "internalType": "uint256" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Initialized",
+    "inputs": [{ "name": "version", "type": "uint8", "indexed": false, "internalType": "uint8" }],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MarketEntered",
+    "inputs": [
+      {
+        "name": "cToken",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract CToken"
+      },
+      { "name": "account", "type": "address", "indexed": false, "internalType": "address" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MarketExited",
+    "inputs": [
+      {
+        "name": "cToken",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract CToken"
+      },
+      { "name": "account", "type": "address", "indexed": false, "internalType": "address" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MarketListed",
+    "inputs": [
+      { "name": "cToken", "type": "address", "indexed": false, "internalType": "contract CToken" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewBorrowCap",
+    "inputs": [
+      { "name": "cToken", "type": "address", "indexed": true, "internalType": "contract CToken" },
+      { "name": "newBorrowCap", "type": "uint256", "indexed": false, "internalType": "uint256" }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewBorrowCapGuardian",
+    "inputs": [
+      {
+        "name": "oldBorrowCapGuardian",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "newBorrowCapGuardian",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewCloseFactor",
+    "inputs": [
+      {
+        "name": "oldCloseFactorMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newCloseFactorMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewCollateralFactor",
+    "inputs": [
+      {
+        "name": "cToken",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract CToken"
+      },
+      {
+        "name": "oldCollateralFactorMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newCollateralFactorMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewLiquidationIncentive",
+    "inputs": [
+      {
+        "name": "oldLiquidationIncentiveMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newLiquidationIncentiveMantissa",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewPauseGuardian",
+    "inputs": [
+      {
+        "name": "oldPauseGuardian",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "newPauseGuardian",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NewPriceOracle",
+    "inputs": [
+      {
+        "name": "oldPriceOracle",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract PriceOracle"
+      },
+      {
+        "name": "newPriceOracle",
+        "type": "address",
+        "indexed": false,
+        "internalType": "contract PriceOracle"
+      }
+    ],
+    "anonymous": false
+  },
+  { "type": "error", "name": "BorrowIsPaused", "inputs": [] },
+  { "type": "error", "name": "CanNotRepayMoreThanTheTotalBorrow", "inputs": [] },
+  { "type": "error", "name": "CannotPauseMarketThatIsNotListed", "inputs": [] },
+  { "type": "error", "name": "CollateralNotEnabledForMarket", "inputs": [] },
+  { "type": "error", "name": "ExitMarketGetAccountSnapshotFailed", "inputs": [] },
+  { "type": "error", "name": "MarketAlreadyAdded", "inputs": [] },
+  { "type": "error", "name": "MarketBorrowCapReached", "inputs": [] },
+  { "type": "error", "name": "MintIsPaused", "inputs": [] },
+  { "type": "error", "name": "OnlyAdminCanSetBorrowCapGuardian", "inputs": [] },
+  { "type": "error", "name": "OnlyAdminCanSetCloseFactor", "inputs": [] },
+  { "type": "error", "name": "OnlyAdminCanUnpause", "inputs": [] },
+  { "type": "error", "name": "OnlyAdminOrBorrowCapGuardianCanSetBorrowCaps", "inputs": [] },
+  { "type": "error", "name": "OnlyPauseGuardianAndAdminCanPause", "inputs": [] },
+  { "type": "error", "name": "RedeemIsPaused", "inputs": [] },
+  { "type": "error", "name": "RedeemTokensZero", "inputs": [] },
+  { "type": "error", "name": "SeizeIsPaused", "inputs": [] },
+  { "type": "error", "name": "SenderMustBeCToken", "inputs": [] }
+]

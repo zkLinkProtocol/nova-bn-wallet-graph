@@ -1,0 +1,37 @@
+type AquaCToken @entity(immutable: true) {
+  # cToken id
+  id: Bytes!
+
+  blockNumber: BigInt!
+
+  transactionHash: Bytes!
+}
+
+type UserPosition @entity(immutable: false) {
+  # account Address
+  id: Bytes!
+
+  positions: [TokenPosition!]! @derivedFrom(field: "userPosition")
+}
+
+type TokenPosition @entity(immutable: false) {
+  # user account + token address
+  id: Bytes!
+  # underlying token address
+  token: Bytes!
+  # underlying balance
+  balance: BigInt!
+  # underlying token decimal
+  decimal: BigInt!
+  # user account
+  userPosition: UserPosition!
+  # hash
+  transactionHash: Bytes!
+  # block number
+  blockNumber: BigInt!
+}
+
+type Test @entity(immutable: true) {
+  # user account + token address
+  id: Bytes!
+}

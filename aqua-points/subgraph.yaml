@@ -1,0 +1,315 @@
+specVersion: 1.0.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Aqua
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5'
+      startBlock: 727
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_ARB.ARB
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x78136b2FbffdF2DF6261990Eec49dbd76Ca63C8F'
+      startBlock: 730
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_MANTA_MANTA
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x069FDE3A1439d39ba2eEf51559ba7006003A4853'
+      startBlock: 734
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_STONE.ETH
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x11ac330ef325Be47A9a95B5d5D1357690A7c55F0'
+      startBlock: 736
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_STONE_MANTA
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0xa5B104E55d42f41cA1dbbb3ee95C62092c04b8f4'
+      startBlock: 738
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_rsETH_ETH
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0xae8AF9bdFE0099f6d0A5234009b78642EfAC1b00'
+      startBlock: 740
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_wstETH_ETH
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x26c506C3D071bb5aDc16a6623c3fC8B508EaDAa0'
+      startBlock: 742
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_wUSDM.MANTA
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x1274C609d81959DA5014288e9Ff8D22B6A781452'
+      startBlock: 25666
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_pufETH.ETH
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0xc2be3CC06Ab964f9E22e492414399DC4A58f96D3'
+      startBlock: 25670
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_USDT
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x0f6Fc293AB973962f9172489f492514Bc43fbA81'
+      startBlock: 601362
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_WBTC
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x97a96711ba21a10BcC5fa75809c2Acbb9dd0a1D4'
+      startBlock: 601379
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_USDC
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x603871A4DDEA08B9375ff6339E319AE7932b640b'
+      startBlock: 601388
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/CErc20.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
