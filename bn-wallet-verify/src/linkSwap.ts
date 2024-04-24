@@ -1,15 +1,15 @@
-import { BigInt, ByteArray, Bytes, crypto, ethereum } from '@graphprotocol/graph-ts'
+import { ByteArray, Bytes, crypto } from '@graphprotocol/graph-ts'
 import { Swap as SwapEvent } from '../generated/LinkSwapUSDC_ARB/LinkSwap'
 import { LinkSwapEntity } from '../generated/schema'
 import { END_TIME, START_TIME } from './constant'
 
 
 export function handleLinkSwap(event: SwapEvent): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 

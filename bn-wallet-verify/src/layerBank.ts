@@ -1,14 +1,13 @@
-import { BigInt } from '@graphprotocol/graph-ts'
 import { Borrow, Mint } from '../generated/LayerBank/LayerBank'
 import { LayerBankEntity } from '../generated/schema'
 import { END_TIME, START_TIME } from './constant'
 
 export function handleLayerBankSupply(event: Mint): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 
@@ -26,11 +25,11 @@ export function handleLayerBankSupply(event: Mint): void {
 
 
 export function handleLayerBankBorrow(event: Borrow): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 

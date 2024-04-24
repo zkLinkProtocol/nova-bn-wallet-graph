@@ -1,4 +1,4 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts'
+import { Address } from '@graphprotocol/graph-ts'
 import { Mint, RfqTrade } from '../generated/NativeXSupply/NativeX'
 import { AquaSupplyEntity, NativeXSwapEntity } from '../generated/schema'
 import { END_TIME, START_TIME } from './constant'
@@ -6,11 +6,11 @@ import { END_TIME, START_TIME } from './constant'
 
 
 export function handleAquaSupply(event: Mint): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(START_TIME)) {
     return
   }
 
@@ -36,11 +36,11 @@ const USDT_ARB = Address.fromString('0x012726F9f458a63f86055b24E67BA0aa26505028'
 const supported_assets = [ARB_ARB, MANTA, STONE_MANTA, WSTETH_ETH, USDT_ARB]
 
 export function handleNativeXSwap(event: RfqTrade): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 

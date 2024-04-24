@@ -4,11 +4,11 @@ import { IZiSwapPoolEntity } from '../generated/schema'
 import { START_TIME, END_TIME } from './constant';
 
 export function handleIZiSwapUSD(event: Swap): void {
-  if (event.block.timestamp.lt(BigInt.fromI32(START_TIME))) {
+  if (event.block.timestamp.lt(START_TIME)) {
     return
   }
 
-  if (event.block.timestamp.gt(BigInt.fromI32(END_TIME))) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 
