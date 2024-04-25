@@ -10,7 +10,7 @@ export function handleAquaSupply(event: Mint): void {
     return
   }
 
-  if (event.block.timestamp.gt(START_TIME)) {
+  if (event.block.timestamp.gt(END_TIME)) {
     return
   }
 
