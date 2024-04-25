@@ -19,7 +19,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -45,7 +45,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -71,7 +71,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -97,7 +97,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -123,7 +123,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -149,7 +149,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -175,7 +175,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -201,7 +201,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -227,7 +227,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -253,7 +253,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -279,7 +279,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -305,7 +305,7 @@ dataSources:
         - TokenPosition
       abis:
         - name: AquaVault
-          file: ./abis/CErc20.json
+          file: ./abis/AquaLpToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod

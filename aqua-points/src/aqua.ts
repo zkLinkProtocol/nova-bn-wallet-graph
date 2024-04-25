@@ -32,8 +32,9 @@ function updateTokenPosition(type: string, event: Transfer): void {
     }
 
     const aquaVault = AquaVault.bind(pool)
+    const vaultAddress = aquaVault.aquaVault()
     const underlying = aquaVault.underlying()
-    const totalBalance = fetchTokenBalanceAmount(underlying.toHexString(), '0x4AC97E2727B0e92AE32F5796b97b7f98dc47F059') // hardcode 
+    const totalBalance = fetchTokenBalanceAmount(underlying.toHexString(), vaultAddress.toHexString())
     const decimal = fetchTokenDecimals(underlying)
 
     const totalSupplied = aquaVault.totalSupply()
