@@ -1,10 +1,12 @@
-type AquaCToken @entity(immutable: true) {
+type AquaCToken @entity(immutable: false) {
   # cToken id
   id: Bytes!
 
-  blockNumber: BigInt!
+  balance: BigInt!
 
-  transactionHash: Bytes!
+  totalSupplied: BigInt!
+
+  blockNumber: BigInt!
 }
 
 type UserPosition @entity(immutable: false) {
@@ -22,7 +24,7 @@ type TokenPosition @entity(immutable: false) {
   # pool address
   pool: Bytes!
   # underlying balance
-  balance: BigInt!
+  supplied: BigInt!
   # underlying token decimal
   decimal: BigInt!
   # user account

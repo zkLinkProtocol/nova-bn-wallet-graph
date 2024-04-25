@@ -17,6 +17,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -43,6 +44,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -69,6 +71,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -95,6 +98,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -121,6 +125,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -147,6 +152,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -173,6 +179,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -199,6 +206,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -225,6 +233,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -251,6 +260,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -277,6 +287,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
@@ -303,6 +314,7 @@ dataSources:
       entities:
         - UserPosition
         - TokenPosition
+        - AquaCToken
       abis:
         - name: AquaVault
           file: ./abis/AquaLpToken.json
