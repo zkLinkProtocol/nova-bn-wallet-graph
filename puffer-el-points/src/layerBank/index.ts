@@ -1,13 +1,9 @@
 /** viewed */
 
 import { LToken, Transfer } from '../../generated/LayerBank/LToken'
-import { L2EthToken } from '../../generated/LayerBank/L2EthToken'
 import { UserPosition, PoolTokenPosition, Pool } from '../../generated/schema'
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts'
+import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from '../aqua/utils/tokenHelper'
-import { ADDRESS_ZERO, L2_ETH, SPECIAL_ADDRESS } from '../constants'
-
-const L1_ETH = ADDRESS_ZERO
 
 export function handleTransfer(event: Transfer): void {
   const lToken = LToken.bind(event.address)
@@ -24,12 +20,12 @@ export function handleTransfer(event: Transfer): void {
     pool.save()
   }
   // update from to
-  if (event.params.from.notEqual(event.address) && !SPECIAL_ADDRESS.includes(event.params.from)) {
+  if (event.params.from.notEqual(Address.zero())) {
     updateTokenPosition('from', event, pool)
   }
 
   // update to address
-  if (event.params.to.notEqual(event.address) && !SPECIAL_ADDRESS.includes(event.params.to)) {
+  if (event.params.to.notEqual(Address.zero())) {
     updateTokenPosition('to', event, pool)
   }
 }
@@ -43,16 +39,7 @@ function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
   const lToken = LToken.bind(event.address)
 
   // update pool
-  let poolBalance = BigInt.zero()
-
-  if (pool.underlying.equals(Bytes.fromHexString(L1_ETH))) {
-    const l2EthToken = L2EthToken.bind(Address.fromString(L2_ETH))
-    poolBalance = l2EthToken.balanceOf(BigInt.fromUnsignedBytes(pool.id))
-
-  } else {
-    poolBalance = fetchTokenBalanceAmount(pool.underlying.toHexString(), pool.id.toHexString());
-
-  }
+  let poolBalance = fetchTokenBalanceAmount(pool.underlying.toHexString(), pool.id.toHexString());
 
   pool.balance = poolBalance
   pool.totalSupplied = lToken.totalSupply();

@@ -1,5 +1,5 @@
 type Pool @entity(immutable: false) {
-  # pool id
+  # pool id + token Address
   id: Bytes!
   # token address
   underlying: Bytes!

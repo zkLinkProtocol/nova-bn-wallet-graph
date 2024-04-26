@@ -22,14 +22,12 @@ function genPool(token: Address, pair: Address): void {
     pool.balance = BigInt.zero()
     pool.totalSupplied = BigInt.zero()
     pool.save()
-    LinkSwapTemplate.create(pair)
   }
-
-
 }
 export function handlePairCreated(event: PairCreated): void {
   genPool(event.params.token0, event.params.pair)
   genPool(event.params.token1, event.params.pair)
+  LinkSwapTemplate.create(event.params.pair)
 }
 
 export function handleTransfer(event: Transfer): void {
@@ -44,7 +42,7 @@ export function handleTransfer(event: Transfer): void {
   if (event.params.from.notEqual(Address.zero())) {
     if (pool0.underlying.equals(pufETHAddress)) {
       updateTokenPosition(event.params.from, event, pool0)
-    }
+    } 
     if (pool1.underlying.equals(pufETHAddress)) {
       updateTokenPosition(event.params.from, event, pool1)
     }
