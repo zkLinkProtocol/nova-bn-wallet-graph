@@ -4,8 +4,8 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy puffer-eth-points --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
-    "create-local": "graph create puffer-eth-points --node http://3.114.68.110:8020",
+    "deploy": "graph deploy puffer-el-points --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
+    "create-local": "graph create puffer-el-points --node http://3.114.68.110:8020",
     "remove-local": "graph remove --node http://3.114.68.110:8020 xx",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 root/zk_l3_graph",
     "test": "graph test"
