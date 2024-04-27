@@ -4,6 +4,7 @@ import { LToken, Transfer } from '../../generated/LayerBank/LToken'
 import { UserPosition, PoolTokenPosition, Pool } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from '../aqua/utils/tokenHelper'
+import { SPECIAL_ADDRESS } from '../constants'
 
 export function handleTransfer(event: Transfer): void {
   const lToken = LToken.bind(event.address)
@@ -20,18 +21,18 @@ export function handleTransfer(event: Transfer): void {
     pool.save()
   }
   // update from to
-  if (event.params.from.notEqual(Address.zero())) {
-    updateTokenPosition('from', event, pool)
+  if (event.params.from.notEqual(Address.zero()) && !SPECIAL_ADDRESS.includes(event.params.from.toHexString().toLowerCase())) {
+    updateTokenPosition(event.params.from, event, pool)
   }
 
   // update to address
-  if (event.params.to.notEqual(Address.zero())) {
-    updateTokenPosition('to', event, pool)
+  if (event.params.to.notEqual(Address.zero()) && !SPECIAL_ADDRESS.includes(event.params.from.toHexString().toLowerCase())) {
+    updateTokenPosition(event.params.to, event, pool)
   }
 }
 
-function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
-  const user = type === 'from' ? event.params.from : event.params.to
+function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
+
 
   // get user entity
   const userPosition = getUserPosition(user)
@@ -54,6 +55,7 @@ function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
   const supplied = lToken.balanceOf(user)
   poolTokenPosition.token = pool.underlying
   poolTokenPosition.pool = pool.id
+  poolTokenPosition.poolName = 'LayerBank'
   poolTokenPosition.supplied = supplied
   poolTokenPosition.userPosition = userPosition.id
   poolTokenPosition.save()

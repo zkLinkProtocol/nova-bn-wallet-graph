@@ -56,6 +56,7 @@ function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
     }
     poolTokenPosition.token = underlying
     poolTokenPosition.pool = pool.id
+    poolTokenPosition.poolName = 'Aqua'
     poolTokenPosition.supplied = supplied
     poolTokenPosition.userPosition = userPosition.id
     poolTokenPosition.save()

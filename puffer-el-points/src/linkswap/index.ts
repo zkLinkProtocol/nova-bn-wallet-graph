@@ -82,6 +82,7 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   const supplied = swapPair.balanceOf(user)
   poolTokenPosition.token = pool.underlying
   poolTokenPosition.pool = pool.id
+  poolTokenPosition.poolName = 'Linkswap'
   poolTokenPosition.supplied = supplied
   poolTokenPosition.userPosition = userPosition.id
   poolTokenPosition.save()

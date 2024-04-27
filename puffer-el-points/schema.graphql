@@ -24,6 +24,8 @@ type PoolTokenPosition @entity(immutable: false) {
   pool: Bytes!
   # total supply amount by user (used to calc the shared balance)
   supplied: BigInt!
+  # pool name
+  poolName: String!
   # user account
   userPosition: UserPosition!
 }
