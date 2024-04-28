@@ -1,118 +1,293 @@
+# specVersion: 1.0.0
+# schema:
+#   file: ./schema.graphql
+# dataSources:
+#   #iZiSwapFactory verify
+#   - kind: ethereum
+#     name: iZiSwapFactory
+#     network: zklink-nova
+#     source:
+#       abi: iZiSwapFactory
+#       address: '0x33D9936b7B7BC155493446B5E6dDC0350EB83AEC'
+#       startBlock: 280
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/izumiFactory.ts
+#       entities:
+#         - Pool
+#         - Token
+#       abis:
+#         - name: iZiSwapFactory
+#           file: ./abis/iZiSwapFactory.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#         - name: ERC20BytesMethod
+#           file: ./abis/ERC20BytesMethod.json
+#       eventHandlers:
+#         - event: NewPool(indexed address,indexed address,indexed uint24,uint24,address)
+#           handler: handleNewPool
+
+#   #iZiSwapLiquidityManager verify
+#   - kind: ethereum
+#     name: iZiSwapLiquidityManager
+#     network: zklink-nova
+#     source:
+#       abi: iZiSwapLiquidityManager
+#       address: '0x936c9A1B8f88BFDbd5066ad08e5d773BC82EB15F'
+#       startBlock: 295
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/izumiLiquidity.ts
+#       entities:
+#         - Pool
+#         - PoolTokenPosition
+#         - TokenPosition
+#         - UserPosition
+#       abis:
+#         - name: iZiSwapLiquidityManager
+#           file: ./abis/iZiSwapLiquidityManager.json
+#         - name: iZiSwapFactory
+#           file: ./abis/iZiSwapFactory.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#         - name: ERC20BytesMethod
+#           file: ./abis/ERC20BytesMethod.json
+#       eventHandlers:
+#         # - event: Transfer(indexed address,indexed address,indexed uint256)
+#         #   handler: handleNftTransfer
+#         - event: AddLiquidity(indexed uint256,address,uint128,uint256,uint256)
+#           handler: handleAddLiquidity
+#         - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
+#           handler: handleAddLiquidity
+
+#   - kind: ethereum
+#     name: layerBank
+#     network: zklink-nova
+#     source:
+#       abi: layerBankCore
+#       address: '0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959'
+#       startBlock: 125988
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/layerBank.ts
+#       entities:
+#         - LayerBankMarket
+#         - UserPosition
+#         - TokenPosition
+#         - PoolTokenPosition
+#       abis:
+#         - name: layerBankCore
+#           file: ./abis/LayerBankCore.json
+#         - name: LayerBankLToken
+#           file: ./abis/LayerBankLToken.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#       eventHandlers:
+#         - event: MarketListed(address)
+#           handler: handleMarketListed
+#         - event: MarketRedeem(address,address,uint256)
+#           handler: handleMarketRedeem
+#         - event: MarketSupply(address,address,uint256)
+#           handler: handleMarketSupply
+
+#   - kind: ethereum
+#     name: linkswapFactory
+#     network: zklink-nova
+#     source:
+#       abi: linkswapFactory
+#       address: '0x87929083ac2215cF3CE4936857D314aF6687C978'
+#       startBlock: 79192
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/linkswap.ts
+#       entities:
+#         - Pool
+#         - Token
+#       abis:
+#         - name: linkswapFactory
+#           file: ./abis/LinkswapFactory.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#         - name: ERC20BytesMethod
+#           file: ./abis/ERC20BytesMethod.json
+#       eventHandlers:
+#         - event: PairCreated(indexed address,indexed address,address,uint256)
+#           handler: handlePairCreated
+
+#   #Aqua verify
+#   - kind: ethereum
+#     name: Aqua
+#     network: zklink-nova
+#     source:
+#       abi: AquaLpToken
+#       address: '0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5'
+#       startBlock: 727
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/aqua.ts
+#       entities:
+#         - AquaMarket
+#         - PoolTokenPosition
+#         - TokenPosition
+#         - UserPosition
+#       abis:
+#         - name: AquaLpToken
+#           file: ./abis/CErc20.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#         - name: ERC20BytesMethod
+#           file: ./abis/ERC20BytesMethod.json
+#       eventHandlers:
+#         - event: Mint(address,uint256,uint256)
+#           handler: handleSupply
+#         - event: Redeem(address,uint256,uint256)
+#           handler: handleWithdraw
+
+#   # Zkdx verify
+#   - kind: ethereum
+#     name: Zkdx
+#     network: zklink-nova
+#     source:
+#       abi: ZkdxStakingETH
+#       address: '0xb5e635f2cB9eAC385D679069f8e0d1740436b355'
+#       startBlock: 266
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/zkdx.ts
+#       entities:
+#         - PoolTokenPosition
+#         - TokenPosition
+#         - UserPosition
+#       abis:
+#         - name: ZkdxStakingETH
+#           file: ./abis/ZkdxStakingETH.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#         - name: ERC20BytesMethod
+#           file: ./abis/ERC20BytesMethod.json
+#       eventHandlers:
+#         - event: Stake(indexed address,uint256)
+#           handler: handleStake
+#         - event: Withdraw(indexed address,uint256)
+#           handler: handleWithdraw
+# # # izumi dynamic pool
+# templates:
+#   - kind: ethereum/contract
+#     name: LinkSwap
+#     network: zklink-nova
+#     source:
+#       abi: SwapPair
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       file: ./src/linkswap.ts
+#       entities:
+#         - Pool
+#         - PoolTokenPosition
+#         - TokenPosition
+#         - UserPosition
+#         - Token
+#       abis:
+#         - name: Factory
+#           file: ./abis/LinkswapFactory.json
+#         - name: SwapPair
+#           file: ./abis/LinkswapISwapPair.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#       eventHandlers:
+#         - event: Mint(indexed address,uint256,uint256)
+#           handler: handleMint
+#         - event: Burn(indexed address,uint256,uint256,indexed address)
+#           handler: handleBurn
 specVersion: 1.0.0
 schema:
   file: ./schema.graphql
 dataSources:
-  #iZiSwapFactory verify
   - kind: ethereum
-    name: iZiSwapFactory
+    name: LayerBank
     network: zklink-nova
     source:
-      abi: iZiSwapFactory
-      address: '0x33D9936b7B7BC155493446B5E6dDC0350EB83AEC'
-      startBlock: 280
+      abi: LToken
+      address: '0xb666582F612692525C4027d2a8280Ac06a055a95'
+      startBlock: 125975
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/izumiFactory.ts
-      entities:
-        - Pool
-        - Token
-      abis:
-        - name: iZiSwapFactory
-          file: ./abis/iZiSwapFactory.json
-        - name: ERC20
-          file: ./abis/ERC20.json
-        - name: ERC20BytesMethod
-          file: ./abis/ERC20BytesMethod.json
-      eventHandlers:
-        - event: NewPool(indexed address,indexed address,indexed uint24,uint24,address)
-          handler: handleNewPool
-
-  #iZiSwapLiquidityManager verify
-  - kind: ethereum
-    name: iZiSwapLiquidityManager
-    network: zklink-nova
-    source:
-      abi: iZiSwapLiquidityManager
-      address: '0x936c9A1B8f88BFDbd5066ad08e5d773BC82EB15F'
-      startBlock: 295
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      file: ./src/izumiLiquidity.ts
+      file: ./src/layerBank/index.ts
       entities:
         - Pool
         - PoolTokenPosition
-        - TokenPosition
         - UserPosition
       abis:
-        - name: iZiSwapLiquidityManager
-          file: ./abis/iZiSwapLiquidityManager.json
-        - name: iZiSwapFactory
-          file: ./abis/iZiSwapFactory.json
-        - name: ERC20
-          file: ./abis/ERC20.json
-        - name: ERC20BytesMethod
-          file: ./abis/ERC20BytesMethod.json
-      eventHandlers:
-        # - event: Transfer(indexed address,indexed address,indexed uint256)
-        #   handler: handleNftTransfer
-        - event: AddLiquidity(indexed uint256,address,uint128,uint256,uint256)
-          handler: handleAddLiquidity
-        - event: DecLiquidity(indexed uint256,address,uint128,uint256,uint256)
-          handler: handleAddLiquidity
-
-  - kind: ethereum
-    name: layerBank
-    network: zklink-nova
-    source:
-      abi: layerBankCore
-      address: '0x4Ac518DbF0CC730A1c880739CFa98fe0bB284959'
-      startBlock: 125988
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      file: ./src/layerBank.ts
-      entities:
-        - LayerBankMarket
-        - UserPosition
-        - TokenPosition
-        - PoolTokenPosition
-      abis:
-        - name: layerBankCore
-          file: ./abis/LayerBankCore.json
-        - name: LayerBankLToken
+        - name: LToken
           file: ./abis/LayerBankLToken.json
+        - name: L2EthToken
+          file: ./abis/L2EthToken.json
         - name: ERC20
           file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
       eventHandlers:
-        - event: MarketListed(address)
-          handler: handleMarketListed
-        - event: MarketRedeem(address,address,uint256)
-          handler: handleMarketRedeem
-        - event: MarketSupply(address,address,uint256)
-          handler: handleMarketSupply
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
 
   - kind: ethereum
-    name: linkswapFactory
+    name: Aqua
     network: zklink-nova
     source:
-      abi: linkswapFactory
+      abi: AquaLpToken
+      address: '0xc2be3cc06ab964f9e22e492414399dc4a58f96d3'
+      startBlock: 25670
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua/index.ts
+      entities:
+        - Pool
+        - PoolTokenPosition
+        - UserPosition
+      abis:
+        - name: AquaLpToken
+          file: ./abis/AquaLpToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: LinkswapFactory
+    network: zklink-nova
+    source:
+      abi: LinkswapFactory
       address: '0x87929083ac2215cF3CE4936857D314aF6687C978'
       startBlock: 79192
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/linkswap.ts
+      file: ./src/linkswap/index.ts
       entities:
         - Pool
-        - Token
       abis:
-        - name: linkswapFactory
+        - name: LinkswapFactory
           file: ./abis/LinkswapFactory.json
         - name: ERC20
           file: ./abis/ERC20.json
@@ -122,38 +297,6 @@ dataSources:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
 
-  #Aqua verify
-  - kind: ethereum
-    name: Aqua
-    network: zklink-nova
-    source:
-      abi: AquaLpToken
-      address: '0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5'
-      startBlock: 727
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      file: ./src/aqua.ts
-      entities:
-        - AquaMarket
-        - PoolTokenPosition
-        - TokenPosition
-        - UserPosition
-      abis:
-        - name: AquaLpToken
-          file: ./abis/CErc20.json
-        - name: ERC20
-          file: ./abis/ERC20.json
-        - name: ERC20BytesMethod
-          file: ./abis/ERC20BytesMethod.json
-      eventHandlers:
-        - event: Mint(address,uint256,uint256)
-          handler: handleSupply
-        - event: Redeem(address,uint256,uint256)
-          handler: handleWithdraw
-
-  # Zkdx verify
   - kind: ethereum
     name: Zkdx
     network: zklink-nova
@@ -165,7 +308,7 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/zkdx.ts
+      file: ./src/zkdx/index.ts
       entities:
         - PoolTokenPosition
         - TokenPosition
@@ -173,6 +316,8 @@ dataSources:
       abis:
         - name: ZkdxStakingETH
           file: ./abis/ZkdxStakingETH.json
+        - name: L2EthToken
+          file: ./abis/L2EthToken.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20BytesMethod
@@ -182,33 +327,29 @@ dataSources:
           handler: handleStake
         - event: Withdraw(indexed address,uint256)
           handler: handleWithdraw
-# # izumi dynamic pool
+
 templates:
   - kind: ethereum/contract
     name: LinkSwap
     network: zklink-nova
     source:
-      abi: SwapPair
+      abi: LinkSwapPair
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/linkswap.ts
+      file: ./src/linkswap/index.ts
       entities:
         - Pool
         - PoolTokenPosition
-        - TokenPosition
         - UserPosition
-        - Token
       abis:
-        - name: Factory
-          file: ./abis/LinkswapFactory.json
-        - name: SwapPair
-          file: ./abis/LinkswapISwapPair.json
+        - name: LinkSwapPair
+          file: ./abis/LinkswapSwapPair.json
         - name: ERC20
           file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
       eventHandlers:
-        - event: Mint(indexed address,uint256,uint256)
-          handler: handleMint
-        - event: Burn(indexed address,uint256,uint256,indexed address)
-          handler: handleBurn
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

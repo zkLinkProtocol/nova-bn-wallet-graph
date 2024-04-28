@@ -1,8 +1,8 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts';
-import { ERC20 } from '../../generated/iZiSwapFactory/ERC20';
-import { ERC20BytesMethod } from '../../generated/iZiSwapFactory/ERC20BytesMethod';
-import { PresetTokenInfoHolder } from '../config';
-import { ADDRESS_ZERO } from '../constants';
+import { ERC20 } from '../../../generated/Aqua/ERC20';
+import { ERC20BytesMethod } from '../../../generated/Aqua/ERC20BytesMethod';
+import { PresetTokenInfoHolder } from '../../config';
+import { ADDRESS_ZERO } from '../../constants';
 import { isNullEthValue } from './funcs';
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
@@ -21,7 +21,7 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
             } else {
                 const tokenInfo = PresetTokenInfoHolder.getMapping().get(tokenAddress.toHexString());
                 if (tokenInfo !== null) {
-                  symbolValue = tokenInfo.symbol;
+                    symbolValue = tokenInfo.symbol;
                 }
             }
         } else {
@@ -34,7 +34,7 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
     return symbolValue;
 }
 
-export function fetchTokenName(tokenAddress: Address): string{
+export function fetchTokenName(tokenAddress: Address): string {
     const contract = ERC20.bind(tokenAddress);
 
     // try types string and bytes32 for name
@@ -50,7 +50,7 @@ export function fetchTokenName(tokenAddress: Address): string{
             } else {
                 const tokenInfo = PresetTokenInfoHolder.getMapping().get(tokenAddress.toHexString());
                 if (tokenInfo !== null) {
-                  nameValue = tokenInfo.name;
+                    nameValue = tokenInfo.name;
                 }
             }
         } else {

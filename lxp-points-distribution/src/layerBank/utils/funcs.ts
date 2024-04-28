@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 import { BigInt, BigDecimal, ethereum, Bytes } from '@graphprotocol/graph-ts';
-import { ONE_BI, ZERO_BI, ZERO_BD, ONE_BD } from '../constants';
+import { ONE_BI, ZERO_BI, ZERO_BD, ONE_BD } from '../../constants';
 
 export function exponentToBigDecimal(decimals: BigInt): BigDecimal {
     let bd = BigDecimal.fromString('1');
