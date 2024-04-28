@@ -83,6 +83,27 @@ dataSources:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
 
+  - kind: ethereum
+    name: ethereum-bridge
+    network: zklink-nova
+    source:
+      address: '0x36CaABbAbfB9C09B722d9C3697C3Cb4A93650ea7'
+      abi: L2ERC20Bridge
+      startBlock: 16
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - UserPosition
+      abis:
+        - name: L2ERC20Bridge
+          file: ./abis/L2ERC20Bridge.json
+      eventHandlers:
+        - event: WithdrawalInitiated(indexed address,indexed address,indexed address,uint256)
+          handler: handleWithdrawalInitiated
+      file: ./src/bridge/withdraw.ts
+
 templates:
   - kind: ethereum/contract
     name: LinkSwap

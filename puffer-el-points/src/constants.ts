@@ -2,6 +2,7 @@ import { BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000';
 export const L2_ETH = '0x000000000000000000000000000000000000800A'
+export const pufETHAddress = Address.fromString('0x1B49eCf1A8323Db4abf48b2F5EFaA33F7DdAB3FC')
 
 export const ZERO_BI = BigInt.fromI32(0);
 export const ONE_BI = BigInt.fromI32(1);

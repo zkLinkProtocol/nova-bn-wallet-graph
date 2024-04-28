@@ -34,5 +34,22 @@ type UserPosition @entity(immutable: false) {
   # account
   id: Bytes!
 
+  withdrawHistory: [Withdrawn!]! @derivedFrom(field: "userPosition")
+
   positions: [PoolTokenPosition!]! @derivedFrom(field: "userPosition")
+}
+
+type Withdrawn @entity(immutable: true) {
+  # transaction hash
+  id: Bytes!
+
+  token: Bytes!
+
+  balance: BigInt!
+
+  blockNumber: BigInt!
+
+  blockTimestamp: BigInt!
+
+  userPosition: UserPosition!
 }

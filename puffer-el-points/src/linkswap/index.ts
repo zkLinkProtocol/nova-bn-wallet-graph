@@ -1,10 +1,11 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { PairCreated } from "../../generated/linkswapFactory/linkswapFactory";
 import { ERC20 } from '../../generated/linkswapFactory/ERC20'
-import { Pool, PoolTokenPosition, UserPosition } from "../../generated/schema";
+import { Pool, PoolTokenPosition } from "../../generated/schema";
 import { Transfer, LinkSwapPair } from "../../generated/templates/LinkSwap/LinkSwapPair";
 import { LinkSwap as LinkSwapTemplate } from '../../generated/templates'
 import { fetchTokenBalanceAmount } from "./utils/tokenHelper";
+import { getUserPosition } from '../general'
 
 const pufETHAddress = Address.fromString('0x1B49eCf1A8323Db4abf48b2F5EFaA33F7DdAB3FC')
 
@@ -42,7 +43,7 @@ export function handleTransfer(event: Transfer): void {
   if (event.params.from.notEqual(Address.zero())) {
     if (pool0.underlying.equals(pufETHAddress)) {
       updateTokenPosition(event.params.from, event, pool0)
-    } 
+    }
     if (pool1.underlying.equals(pufETHAddress)) {
       updateTokenPosition(event.params.from, event, pool1)
     }
@@ -88,13 +89,5 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.save()
 }
 
-function getUserPosition(user: Address): UserPosition {
-  let userPosition = UserPosition.load(user)
-  if (!userPosition) {
-    userPosition = new UserPosition(user)
-    userPosition.save()
-  }
 
-  return userPosition
-}
 

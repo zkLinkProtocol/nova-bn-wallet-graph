@@ -1,9 +1,10 @@
 /** viewed */
 
 import { AquaLpToken, Transfer } from '../../generated/Aqua/AquaLpToken'
-import { UserPosition, PoolTokenPosition, Pool } from '../../generated/schema'
+import { PoolTokenPosition, Pool } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from './utils/tokenHelper'
+import { getUserPosition } from '../general'
 
 export function handleTransfer(event: Transfer): void {
 
@@ -62,13 +63,3 @@ function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
     poolTokenPosition.save()
 }
 
-
-function getUserPosition(user: Address): UserPosition {
-    let userPosition = UserPosition.load(user)
-    if (!userPosition) {
-        userPosition = new UserPosition(user)
-        userPosition.save()
-    }
-
-    return userPosition
-}

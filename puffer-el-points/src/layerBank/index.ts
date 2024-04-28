@@ -1,10 +1,11 @@
 /** viewed */
 
 import { LToken, Transfer } from '../../generated/LayerBank/LToken'
-import { UserPosition, PoolTokenPosition, Pool } from '../../generated/schema'
+import { PoolTokenPosition, Pool } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from '../aqua/utils/tokenHelper'
 import { SPECIAL_ADDRESS } from '../constants'
+import { getUserPosition } from '../general'
 
 export function handleTransfer(event: Transfer): void {
   const lToken = LToken.bind(event.address)
@@ -61,13 +62,5 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.save()
 }
 
-function getUserPosition(user: Address): UserPosition {
-  let userPosition = UserPosition.load(user)
-  if (!userPosition) {
-    userPosition = new UserPosition(user)
-    userPosition.save()
-  }
 
-  return userPosition
-}
 
