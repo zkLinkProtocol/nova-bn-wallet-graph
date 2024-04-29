@@ -30,8 +30,6 @@ type PoolTokenPosition @entity(immutable: false) {
   userPosition: UserPosition!
 }
 
-A - B 
-A - pool
 type UserPosition @entity(immutable: false) {
   # account
   id: Bytes!
