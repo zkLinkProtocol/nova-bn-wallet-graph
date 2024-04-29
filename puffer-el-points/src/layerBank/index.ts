@@ -29,15 +29,12 @@ export function handleTransfer(event: Transfer): void {
   }
 
   // update to address
-  if (event.params.to.notEqual(Address.zero()) && !SPECIAL_ADDRESS.includes(event.params.from.toHexString().toLowerCase())) {
+  if (event.params.to.notEqual(Address.zero()) && !SPECIAL_ADDRESS.includes(event.params.to.toHexString().toLowerCase())) {
     updateTokenPosition(event.params.to, event, pool)
   }
 }
 
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
-
-
-
   const lToken = LToken.bind(event.address)
 
   // update pool
