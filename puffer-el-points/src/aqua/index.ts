@@ -4,9 +4,10 @@ import { AquaLpToken, Transfer } from '../../generated/Aqua/AquaLpToken'
 import { PoolTokenPosition, Pool } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from './utils/tokenHelper'
-import { getUserPosition } from '../general'
+import { setUserInvalid } from '../general'
 
 export function handleTransfer(event: Transfer): void {
+    setUserInvalid(event.address)
 
     let pool = Pool.load(event.address)
     if (!pool) {
@@ -22,19 +23,16 @@ export function handleTransfer(event: Transfer): void {
     }
     // update from to
     if (event.params.from.notEqual(event.address)) {
-        updateTokenPosition('from', event, pool)
+        updateTokenPosition(event.params.from, event, pool)
     }
 
     // update to address
     if (event.params.to.notEqual(event.address)) {
-        updateTokenPosition('to', event, pool)
+        updateTokenPosition(event.params.to, event, pool)
     }
 }
 
-function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
-    const user = type === 'from' ? event.params.from : event.params.to
-
-    const userPosition = getUserPosition(user)
+function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
 
     const aquaVault = AquaLpToken.bind(Address.fromBytes(pool.id))
     const vaultAddress = aquaVault.aquaVault()
@@ -59,7 +57,7 @@ function updateTokenPosition(type: string, event: Transfer, pool: Pool): void {
     poolTokenPosition.pool = pool.id
     poolTokenPosition.poolName = 'Aqua'
     poolTokenPosition.supplied = supplied
-    poolTokenPosition.userPosition = userPosition.id
+    poolTokenPosition.userPosition = user
     poolTokenPosition.save()
 }
 

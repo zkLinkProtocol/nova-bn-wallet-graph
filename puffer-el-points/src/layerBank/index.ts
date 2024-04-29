@@ -5,9 +5,11 @@ import { PoolTokenPosition, Pool } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from '../aqua/utils/tokenHelper'
 import { SPECIAL_ADDRESS } from '../constants'
-import { getUserPosition } from '../general'
+import { setUserInvalid } from '../general'
 
 export function handleTransfer(event: Transfer): void {
+  setUserInvalid(event.address)
+
   const lToken = LToken.bind(event.address)
   const underlying = lToken.underlying()
   let pool = Pool.load(event.address)
@@ -35,8 +37,6 @@ export function handleTransfer(event: Transfer): void {
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
 
 
-  // get user entity
-  const userPosition = getUserPosition(user)
 
   const lToken = LToken.bind(event.address)
 
@@ -58,7 +58,7 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.pool = pool.id
   poolTokenPosition.poolName = 'LayerBank'
   poolTokenPosition.supplied = supplied
-  poolTokenPosition.userPosition = userPosition.id
+  poolTokenPosition.userPosition = user
   poolTokenPosition.save()
 }
 

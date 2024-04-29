@@ -25,7 +25,7 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
                 }
             }
         } else {
-            return ADDRESS_ZERO
+            return ADDRESS_ZERO.toHexString()
         }
     } else {
         symbolValue = symbolResult.value;

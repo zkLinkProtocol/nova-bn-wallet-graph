@@ -5,7 +5,7 @@ import { Pool, PoolTokenPosition } from "../../generated/schema";
 import { Transfer, LinkSwapPair } from "../../generated/templates/LinkSwap/LinkSwapPair";
 import { LinkSwap as LinkSwapTemplate } from '../../generated/templates'
 import { fetchTokenBalanceAmount } from "./utils/tokenHelper";
-import { getUserPosition } from '../general'
+import { setUserInvalid } from '../general'
 
 const pufETHAddress = Address.fromString('0x1B49eCf1A8323Db4abf48b2F5EFaA33F7DdAB3FC')
 
@@ -32,6 +32,8 @@ export function handlePairCreated(event: PairCreated): void {
 }
 
 export function handleTransfer(event: Transfer): void {
+
+  setUserInvalid(event.address)
 
   const swapPair = LinkSwapPair.bind(event.address)
   const pool0 = Pool.load(swapPair.token0().concat(event.address))
@@ -62,9 +64,6 @@ export function handleTransfer(event: Transfer): void {
 
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
 
-  // get user entity
-  const userPosition = getUserPosition(user)
-
   const poolUnderlying = pool.underlying
   const poolBalance = fetchTokenBalanceAmount(poolUnderlying.toHexString(), event.address.toHexString())
   const swapPair = LinkSwapPair.bind(event.address)
@@ -85,7 +84,7 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.pool = pool.id
   poolTokenPosition.poolName = 'Linkswap'
   poolTokenPosition.supplied = supplied
-  poolTokenPosition.userPosition = userPosition.id
+  poolTokenPosition.userPosition = user
   poolTokenPosition.save()
 }
 

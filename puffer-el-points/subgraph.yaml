@@ -84,6 +84,27 @@ dataSources:
           handler: handlePairCreated
 
   - kind: ethereum
+    name: pufferEth
+    network: zklink-nova
+    source:
+      address: '0x1B49eCf1A8323Db4abf48b2F5EFaA33F7DdAB3FC' # pufEth address
+      abi: ERC20
+      startBlock: 195
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/transfer.ts
+      entities:
+        - UserPosition
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
     name: ethereum-bridge
     network: zklink-nova
     source:
@@ -99,6 +120,8 @@ dataSources:
       abis:
         - name: L2ERC20Bridge
           file: ./abis/L2ERC20Bridge.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: WithdrawalInitiated(indexed address,indexed address,indexed address,uint256)
           handler: handleWithdrawalInitiated
