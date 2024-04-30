@@ -11,9 +11,9 @@ export function updateUserBalance(user: Address, updatedToken: Bytes, balance: B
     }
     userPosition.save()
 
-    let tokenBalance = Balance.load(updatedToken)
+    let tokenBalance = Balance.load(user.concat(updatedToken))
     if (!tokenBalance) {
-        tokenBalance = new Balance(updatedToken)
+        tokenBalance = new Balance(user.concat(updatedToken))
     }
     tokenBalance.balance = balance
     tokenBalance.userBalance = userPosition.id

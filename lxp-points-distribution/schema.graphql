@@ -29,7 +29,7 @@ type PoolTokenPosition @entity(immutable: false) {
 }
 
 type Balance @entity(immutable: false) {
-  # token address
+  # user account + token address
   id: Bytes!
   # token balance
   balance: BigInt!
