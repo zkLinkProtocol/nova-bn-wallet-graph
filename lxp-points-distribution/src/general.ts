@@ -16,6 +16,7 @@ export function updateUserBalance(user: Address, updatedToken: Bytes, balance: B
         tokenBalance = new Balance(user.concat(updatedToken))
     }
     tokenBalance.balance = balance
+    tokenBalance.token = updatedToken
     tokenBalance.userBalance = userPosition.id
     tokenBalance.save()
     log.info('updateUserBalance: {}, {}, {}', [user.toHexString(), updatedToken.toHexString(), balance.toString()])
