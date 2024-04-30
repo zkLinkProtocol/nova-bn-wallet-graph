@@ -1,9 +1,9 @@
-import { Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { Address, BigInt, Bytes, log } from "@graphprotocol/graph-ts"
 import { UserPosition, Balance } from "../generated/schema"
 
 
 // using for erc20 transfer event
-export function updateUserBalance(user: Address, updatedToken: Bytes, balance: BigInt): UserPosition {
+export function updateUserBalance(user: Address, updatedToken: Bytes, balance: BigInt): void {
     let userPosition = UserPosition.load(user)
     if (!userPosition) {
         userPosition = new UserPosition(user)
@@ -16,10 +16,9 @@ export function updateUserBalance(user: Address, updatedToken: Bytes, balance: B
         tokenBalance = new Balance(updatedToken)
     }
     tokenBalance.balance = balance
-    tokenBalance.userBalance = user
+    tokenBalance.userBalance = userPosition.id
     tokenBalance.save()
-
-    return userPosition
+    log.info('updateUserBalance: {}, {}, {}', [user.toHexString(), updatedToken.toHexString(), balance.toString()])
 }
 
 // using for setting contract address invalid

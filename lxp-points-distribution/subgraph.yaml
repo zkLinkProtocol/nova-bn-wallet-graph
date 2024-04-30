@@ -119,8 +119,8 @@ dataSources:
     network: zklink-nova
     source:
       abi: L2EthTokenABI
-      address: '0x000000000000000000000000000000000000800a'
-      startBlock: 0
+      address: '0x000000000000000000000000000000000000800A'
+      startBlock: 1
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -135,7 +135,12 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleL2EthTransfer
-
+        - event: Mint(indexed address,uint256)
+          handler: handleL2EthMint
+        - event: Withdrawal(indexed address,indexed address,uint256)
+          handler: handleL2EthWithdrawal
+        - event: WithdrawalWithMessage(indexed address,indexed address,uint256,bytes)
+          handler: handleL2EthWithdrawalWithMessage
   - kind: ethereum
     name: WETH
     network: zklink-nova
