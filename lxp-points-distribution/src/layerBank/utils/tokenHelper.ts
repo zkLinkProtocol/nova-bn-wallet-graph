@@ -3,7 +3,7 @@ import { ERC20 } from '../../../generated/LayerBank/ERC20';
 import { ERC20BytesMethod } from '../../../generated/LayerBank/ERC20BytesMethod';
 import { PresetTokenInfoHolder } from '../../config';
 import { ADDRESS_ZERO } from '../../constants';
-import { isNullEthValue } from './funcs';
+import { isNullEthValue } from '../../utils/index';
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
     const contract = ERC20.bind(tokenAddress);

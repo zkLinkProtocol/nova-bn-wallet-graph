@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
-import { BigInt, BigDecimal, ethereum, Bytes } from '@graphprotocol/graph-ts';
-import { ONE_BI, ZERO_BI, ZERO_BD, ONE_BD } from '../../constants';
+import { BigInt, BigDecimal, Bytes } from '@graphprotocol/graph-ts';
+import { ONE_BI, ZERO_BI, ZERO_BD, ONE_BD } from '../constants';
 
 export function exponentToBigDecimal(decimals: BigInt): BigDecimal {
     let bd = BigDecimal.fromString('1');
@@ -19,7 +19,7 @@ export function safeDiv(amount0: BigDecimal, amount1: BigDecimal): BigDecimal {
     }
 }
 
-export function bigDecimalExponated(value: BigDecimal, power: BigInt): BigDecimal {
+export function bigDecimalExponentiated(value: BigDecimal, power: BigInt): BigDecimal {
     if (power.equals(ZERO_BI)) {
         return ONE_BD;
     }
@@ -81,7 +81,7 @@ export function convertEthToDecimal(eth: BigInt): BigDecimal {
 
 export function tick2PriceDecimal(tick: i32, tokenXDecimals: BigInt, tokenYDecimals: BigInt): BigDecimal {
     // (1.0001 ** tick) * (10 ** tokenXDecimals / 10 ** tokenYDecimals)
-    return bigDecimalExponated(BigDecimal.fromString('1.0001'), BigInt.fromI32(tick)).times(
+    return bigDecimalExponentiated(BigDecimal.fromString('1.0001'), BigInt.fromI32(tick)).times(
         exponentToBigDecimal(tokenXDecimals).div(exponentToBigDecimal(tokenYDecimals))
     );
 }
@@ -111,7 +111,7 @@ export function topicToAddress(bytes: Bytes): string {
     return '0x' + bytes.toHexString().substr(26);
 }
 
-export function calculatetTick2PriceDecimal(tick: i32, tokenXDecimals: BigInt, tokenYDecimals: BigInt): BigDecimal {
+export function calculateTick2PriceDecimal(tick: i32, tokenXDecimals: BigInt, tokenYDecimals: BigInt): BigDecimal {
     let xDecimals = bigIntToNumber(tokenXDecimals);
     let yDecimals = bigIntToNumber(tokenYDecimals);
 

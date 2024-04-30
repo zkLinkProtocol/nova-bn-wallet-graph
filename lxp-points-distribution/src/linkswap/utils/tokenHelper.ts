@@ -3,7 +3,7 @@ import { ERC20 } from '../../../generated/templates/LinkSwap/ERC20'
 import { ERC20BytesMethod } from '../../../generated/templates/LinkSwap/ERC20BytesMethod';
 import { PresetTokenInfoHolder } from '../../config';
 import { ADDRESS_ZERO } from '../../constants';
-import { isNullEthValue } from './funcs';
+import { isNullEthValue } from '../../utils/index';
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
     const contract = ERC20.bind(tokenAddress);
@@ -69,7 +69,7 @@ export function fetchTokenTotalSupply(tokenAddress: Address): BigInt {
     return totalSupplyResult.value;
 }
 
-export function fetchTokenDecimals(tokenAddress: Address): BigInt | null {
+export function fetchTokenDecimals(tokenAddress: Address): BigInt {
     let contract = ERC20.bind(tokenAddress);
     // try types uint8 for decimals
     const decimalResult = contract.try_decimals();
@@ -81,7 +81,7 @@ export function fetchTokenDecimals(tokenAddress: Address): BigInt | null {
             return tokenInfo.decimals;
         }
     }
-    return null;
+    return BigInt.fromI32(18);
 }
 
 export function fetchTokenBalanceAmount(tokenAddress: string, ownerAddress: string): BigInt {

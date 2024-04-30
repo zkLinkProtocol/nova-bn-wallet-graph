@@ -1,17 +1,18 @@
 type Pool @entity(immutable: false) {
   # pool id
   id: Bytes!
-  # token address
-  underlying: Bytes!
-  # underlying  balance
-  decimals: BigInt!
+  # pool name
+  poolName: String!
   # underlying  balance
   balance: BigInt!
   # total supplied
   totalSupplied: BigInt!
-
+  # underlying token address
+  underlying: Bytes!
+  # underlying token symbol
   symbol: String!
-
+  # underlying token decimals
+  decimals: BigInt!
 }
 
 type PoolTokenPosition @entity(immutable: false) {
@@ -27,9 +28,22 @@ type PoolTokenPosition @entity(immutable: false) {
   userPosition: UserPosition!
 }
 
+type Balance @entity(immutable: false) {
+  # token address
+  id: Bytes!
+  # token balance
+  balance: BigInt!
+  # user account
+  userBalance: UserPosition!
+}
+
 type UserPosition @entity(immutable: false) {
   # account
   id: Bytes!
+
+  validate: Boolean!
+
+  balances: [Balance!]! @derivedFrom(field: "userBalance")
 
   positions: [PoolTokenPosition!]! @derivedFrom(field: "userPosition")
 }
