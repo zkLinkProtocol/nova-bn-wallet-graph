@@ -4,7 +4,6 @@ indexerHints:
 schema:
   file: ./schema.graphql
 dataSources:
-
   - kind: ethereum
     name: LinkSwapUSDC_ARB
     network: zklink-nova
@@ -67,7 +66,7 @@ dataSources:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleLinkSwap
       file: ./src/linkSwap.ts
-  
+
   - kind: ethereum
     name: LinkSwapUSDT_ETH
     network: zklink-nova
@@ -88,7 +87,7 @@ dataSources:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleLinkSwap
       file: ./src/linkSwap.ts
-    
+
   - kind: ethereum
     name: LinkSwapUSDC_ARB1
     network: zklink-nova
@@ -130,7 +129,7 @@ dataSources:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleLinkSwap
       file: ./src/linkSwap.ts
-    
+
   - kind: ethereum
     name: LinkSwapUSDC_MERGE
     network: zklink-nova
@@ -159,6 +158,69 @@ dataSources:
       address: "0x5457c04370c447aed563489d9fe0b1d057439e0b"
       abi: iZiSwapPool
       startBlock: 419777
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDT_ETH2
+    network: zklink-nova
+    source:
+      address: "0xe8a8f1d76625b03b787f6ed17bd746e0515f3aef"
+      abi: iZiSwapPool
+      startBlock: 477718
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDT.op_ETH
+    network: zklink-nova
+    source:
+      address: "0x82b7dbfdc869a529cbcfc89dc384b0222427ff91"
+      abi: iZiSwapPool
+      startBlock: 166428
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - iZiSwapPoolEntity
+      abis:
+        - name: iZiSwapPool
+          file: ./abis/iZiSwapPool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
+          handler: handleIZiSwapUSD
+      file: ./src/iZiSwapPool.ts
+
+  - kind: ethereum
+    name: iZiSwapUSDC.op_ETH
+    network: zklink-nova
+    source:
+      address: "0x39abf030516e346f6c6779d03b260a4449705ce0"
+      abi: iZiSwapPool
+      startBlock: 166457
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -214,7 +276,7 @@ dataSources:
         - event: Swap(indexed address,indexed address,indexed uint24,bool,uint256,uint256,int24)
           handler: handleIZiSwapUSD
       file: ./src/iZiSwapPool.ts
-  
+
   - kind: ethereum
     name: iZiSwapUSDT.Arbi_ETH
     network: zklink-nova
@@ -552,7 +614,7 @@ dataSources:
         - event: Mint(address,uint256,uint256)
           handler: handleAquaSupply
       file: ./src/nativeX.ts
-  
+
   - kind: ethereum
     name: NativeXSupplyUSDC.MERGE
     network: zklink-nova
@@ -596,7 +658,7 @@ dataSources:
       file: ./src/nativeX.ts
 
   - kind: ethereum
-    name: NativeXSupplywstETH.LINEA  
+    name: NativeXSupplywstETH.LINEA
     network: zklink-nova
     source:
       address: "0x0d3e7e8d54E686d323a190eAac163CF9AAb6d7fd"
