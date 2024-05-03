@@ -1,4 +1,5 @@
 specVersion: 1.0.0
+description: LXP points subgraph on zklink nova
 schema:
   file: ./schema.graphql
 dataSources:
@@ -137,10 +138,7 @@ dataSources:
           handler: handleL2EthTransfer
         - event: Mint(indexed address,uint256)
           handler: handleL2EthMint
-        - event: Withdrawal(indexed address,indexed address,uint256)
-          handler: handleL2EthWithdrawal
-        - event: WithdrawalWithMessage(indexed address,indexed address,uint256,bytes)
-          handler: handleL2EthWithdrawalWithMessage
+
   - kind: ethereum
     name: WETH
     network: zklink-nova
