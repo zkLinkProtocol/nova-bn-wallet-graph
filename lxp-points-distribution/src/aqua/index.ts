@@ -34,13 +34,14 @@ export function handleTransfer(event: Transfer): void {
 
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
 
-    const aquaVault = AquaLpToken.bind(Address.fromBytes(pool.id))
-    const underlying = aquaVault.underlying()
-    const totalBalance = aquaVault.getCash()
+    const aquaCToken = AquaLpToken.bind(Address.fromBytes(pool.id))
+    const underlying = aquaCToken.underlying()
+    const totalBalance = aquaCToken.getCash()
+    setUserInvalid(aquaCToken.aquaVault()) // THE ETH locked in this account
 
 
     pool.balance = totalBalance;
-    pool.totalSupplied = aquaVault.totalSupply();
+    pool.totalSupplied = aquaCToken.totalSupply();
     pool.save()
 
     const tokenPositionId = user.concat(Address.fromHexString(event.address.toHexString()))
@@ -50,7 +51,7 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
     }
     poolTokenPosition.token = underlying
     poolTokenPosition.pool = pool.id
-    poolTokenPosition.supplied = aquaVault.balanceOf(user)
+    poolTokenPosition.supplied = aquaCToken.balanceOf(user)
     poolTokenPosition.userPosition = user
     poolTokenPosition.save()
 }
