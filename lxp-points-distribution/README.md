@@ -1,5 +1,7 @@
 # Linea Network points
 
+The graphql client site is https://graph.zklink.io/subgraphs/name/lxp-points-distribution.
+
 # Overview
 
 This repository aims to provide balance shares for EOA accounts for credit scoring on the Linea network.To tally the transfer records of ERC20 tokens for accounting balances, and to allocate LP (liquidity provider) balance points proportionately based on user shares in different LPs on the Nova network.
@@ -17,28 +19,7 @@ This repository aims to provide balance shares for EOA accounts for credit scori
 
 0x33D9936b7B7BC155493446B5E6dDC0350EB83AEC factory
 
-The liquidityManage address is `0x936c9A1B8f88BFDbd5066ad08e5d773BC82EB15F`, When adding liquidity, it will transfer WETH/ETH to this contract. When removing liquidity, it will transfer WETH/ETH from this contract.
-
-```
-event AddLiquidity(
-    uint256 indexed nftId,
-    address pool,
-    uint128 liquidityDelta,
-    uint256 amountX,
-    uint256 amountY
-);
-
-event DecLiquidity(
-    uint256 indexed nftId,
-    address pool,
-    uint128 liquidityDelta,
-    uint256 amountX,
-    uint256 amountY
-);
-
-// method
-update
-```
+The liquidityManage address is `0x936c9A1B8f88BFDbd5066ad08e5d773BC82EB15F`, When adding liquidity, it will transfer WETH/ETH to this contract. When removing liquidity, it will transfer WETH/ETH from this contract. We utilize the izumi sdk script to collect the share balance, so in this repository will not process the user's staking balance in the repo.
 
 The total balance locked in pool should be sum by the following pool
 
@@ -69,12 +50,10 @@ The total balance locked in pool should be sum by the following pool
 
 MarketListed
 
-| Action   | TX sample                                                          | Share change | Event        |
-| -------- | ------------------------------------------------------------------ | ------------ | ------------ |
-| supply   | 0x00183e47e959ae59de282077ad2ce0b00e8699d74bc47e92506190292b72244a | &check;      | MarketSupply |
-| withdraw | 0x76c1a783baa9287ba9e2d997b28548324e29d3b9bfc0cdc4f71cb915d4d3b452 | &check;      | MarketRedeem |
-| borrow   | 0x3919e36bca90e165fc264b88ae23fb663e5340ec2368b70b826eb669ce87bec3 | x            | Borrow       |
-| repay    | 0x3e889f21ba6a11adcb536200e00b6c3055a76b5b02634bae38ab73a0eca49c7f | x            | RepayBorrow  |
+| Action   | TX sample                                                          | LP change | Event                   |
+| -------- | ------------------------------------------------------------------ | --------- | ----------------------- |
+| supply   | 0x00183e47e959ae59de282077ad2ce0b00e8699d74bc47e92506190292b72244a | &check;   | MarketSupply & Transfer |
+| withdraw | 0x76c1a783baa9287ba9e2d997b28548324e29d3b9bfc0cdc4f71cb915d4d3b452 | &check;   | MarketRedeem & Transfer |
 
 ## Project - LinkSwap ⏰
 
@@ -90,10 +69,6 @@ The sample of add/remove liquidity on LP `0x4eaDd78a23E152FeC2b63F0f5A3423bDa220
 0xE0dC68AE19D82b3b56BCbfe8e022F04da17A3e7B AquaLpToken implement contracts
 
 The AQ-LP-ETH token is `0x9e5CabD99Dfb4e4a0C3Ea6Fe9c3E1A4ce4f5Fce5`
-
-## Project - NativeX
-
-Swap, the related contract including `0xf79D2ba9a8cbB68ad475CF0c323BC61502BED786` and `0x4712707F93Ea7544052Cbb2616D9407578cC149b`
 
 ## Project - ZKDX
 
