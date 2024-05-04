@@ -4,10 +4,12 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy layerbank-point --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
-    "create-local": "graph create layerbank-point --node http://3.114.68.110:8020",
-    "remove-local": "graph remove --node http://3.114.68.110:8020 root/aqua-points",
-    "deploy-local": "graph deploy --node http://3.114.68.110:8020 --ipfs http://3.114.68.110:5001 root/aqua-points",
+    "create": "graph create layerbank-points --node http://localhost:8020",
+    "deploy": "graph deploy layerbank-points  --ipfs http://localhost:5001 --node http://localhost:8020/",
+    "remove": "graph remove --node http://localhost:8020 layerbank-points",
+    "create-local": "graph create layerbank-points --node http://3.114.68.110:8020",
+    "deploy-local": "graph deploy layerbank-points --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
+    "remove-local": "graph remove --node http://3.114.68.110:8020 layerbank-points",
     "test": "graph test"
   },
   "dependencies": {
