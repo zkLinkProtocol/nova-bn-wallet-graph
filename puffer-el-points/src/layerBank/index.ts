@@ -1,7 +1,7 @@
 /** viewed */
 
 import { LToken, Transfer } from '../../generated/LayerBank/LToken'
-import { PoolTokenPosition, Pool } from '../../generated/schema'
+import { PoolTokenPosition, Pool, PoolTokenPositionHistoryItem } from '../../generated/schema'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { fetchTokenBalanceAmount, fetchTokenSymbol } from '../aqua/utils/tokenHelper'
 import { SPECIAL_ADDRESS } from '../constants'
@@ -57,6 +57,20 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.supplied = supplied
   poolTokenPosition.userPosition = user
   poolTokenPosition.save()
+
+  const poolTokenPositionHistoricId = pool.underlying.concat(event.transaction.hash)
+  let poolTokenPositionHistoryItem = PoolTokenPositionHistoryItem.load(poolTokenPositionHistoricId)
+  if (!poolTokenPositionHistoryItem) {
+    poolTokenPositionHistoryItem = new PoolTokenPositionHistoryItem(poolTokenPositionHistoricId)
+  }
+  poolTokenPositionHistoryItem.token = pool.underlying
+  poolTokenPositionHistoryItem.pool = pool.id
+  poolTokenPositionHistoryItem.poolName = 'LayerBank'
+  poolTokenPositionHistoryItem.supplied = supplied
+  poolTokenPositionHistoryItem.userPosition = user
+  poolTokenPositionHistoryItem.blockNumber = event.block.number
+  poolTokenPositionHistoryItem.blockTimestamp = event.block.timestamp
+  poolTokenPositionHistoryItem.save()
 }
 
 

@@ -1,7 +1,7 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { PairCreated } from "../../generated/linkswapFactory/linkswapFactory";
 import { ERC20 } from '../../generated/linkswapFactory/ERC20'
-import { Pool, PoolTokenPosition } from "../../generated/schema";
+import { Pool, PoolTokenPosition, PoolTokenPositionHistoryItem } from "../../generated/schema";
 import { Transfer, LinkSwapPair } from "../../generated/templates/LinkSwap/LinkSwapPair";
 import { LinkSwap as LinkSwapTemplate } from '../../generated/templates'
 import { fetchTokenBalanceAmount } from "./utils/tokenHelper";
@@ -86,6 +86,20 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.supplied = supplied
   poolTokenPosition.userPosition = user
   poolTokenPosition.save()
+
+  const poolTokenPositionHistoricId = pool.underlying.concat(event.transaction.hash)
+  let poolTokenPositionHistoryItem = PoolTokenPositionHistoryItem.load(poolTokenPositionHistoricId)
+  if (!poolTokenPositionHistoryItem) {
+    poolTokenPositionHistoryItem = new PoolTokenPositionHistoryItem(poolTokenPositionHistoricId)
+  }
+  poolTokenPositionHistoryItem.token = pool.underlying
+  poolTokenPositionHistoryItem.pool = pool.id
+  poolTokenPositionHistoryItem.poolName = 'Linkswap'
+  poolTokenPositionHistoryItem.supplied = supplied
+  poolTokenPositionHistoryItem.userPosition = user
+  poolTokenPositionHistoryItem.blockNumber = event.block.number
+  poolTokenPositionHistoryItem.blockTimestamp = event.block.timestamp
+  poolTokenPositionHistoryItem.save()
 }
 
 

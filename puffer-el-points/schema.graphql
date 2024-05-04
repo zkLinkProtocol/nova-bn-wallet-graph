@@ -35,12 +35,14 @@ type UserPosition @entity(immutable: false) {
   id: Bytes!
 
   balance: BigInt!
-
-  validate: Boolean! # if it is a pool position
+  # if it is a pool position
+  validate: Boolean!
+  # position list on all kind of pool
+  positions: [PoolTokenPosition!]! @derivedFrom(field: "userPosition")
+  # position history list on all kind of pool
+  positionHistory: [PoolTokenPositionHistoryItem!]! @derivedFrom(field: "userPosition")
 
   withdrawHistory: [Withdrawn!]! @derivedFrom(field: "userPosition")
-
-  positions: [PoolTokenPosition!]! @derivedFrom(field: "userPosition")
 }
 
 type Withdrawn @entity(immutable: true) {
@@ -55,5 +57,24 @@ type Withdrawn @entity(immutable: true) {
 
   blockTimestamp: BigInt!
 
+  userPosition: UserPosition!
+}
+
+type PoolTokenPositionHistoryItem @entity(immutable: true) {
+  # token address + transaction hash
+  id: Bytes!
+  # token address
+  token: Bytes!
+  # pool id
+  pool: Bytes!
+  # total supply amount by user (used to calc the shared balance)
+  supplied: BigInt!
+  # pool name
+  poolName: String!
+  # block number
+  blockNumber: BigInt!
+  # blockTimestamp
+  blockTimestamp: BigInt!
+  # user account
   userPosition: UserPosition!
 }
