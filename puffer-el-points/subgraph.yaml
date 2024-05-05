@@ -18,6 +18,8 @@ dataSources:
         - Pool
         - PoolTokenPosition
         - UserPosition
+        - PoolTokenPositionHistoryItem
+        - PoolHistoricItem
       abis:
         - name: LToken
           file: ./abis/LayerBankLToken.json
@@ -47,6 +49,8 @@ dataSources:
         - Pool
         - PoolTokenPosition
         - UserPosition
+        - PoolTokenPositionHistoryItem
+        - PoolHistoricItem
       abis:
         - name: AquaLpToken
           file: ./abis/AquaLpToken.json
@@ -142,6 +146,8 @@ templates:
         - Pool
         - PoolTokenPosition
         - UserPosition
+        - PoolTokenPositionHistoryItem
+        - PoolHistoricItem
       abis:
         - name: LinkSwapPair
           file: ./abis/LinkswapSwapPair.json

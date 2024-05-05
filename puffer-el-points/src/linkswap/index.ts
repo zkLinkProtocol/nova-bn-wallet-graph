@@ -1,7 +1,7 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { PairCreated } from "../../generated/linkswapFactory/linkswapFactory";
 import { ERC20 } from '../../generated/linkswapFactory/ERC20'
-import { Pool, PoolTokenPosition, PoolTokenPositionHistoryItem } from "../../generated/schema";
+import { Pool, PoolHistoricItem, PoolTokenPosition, PoolTokenPositionHistoryItem } from "../../generated/schema";
 import { Transfer, LinkSwapPair } from "../../generated/templates/LinkSwap/LinkSwapPair";
 import { LinkSwap as LinkSwapTemplate } from '../../generated/templates'
 import { fetchTokenBalanceAmount } from "./utils/tokenHelper";
@@ -73,6 +73,7 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   pool.totalSupplied = swapPair.totalSupply();
   pool.save()
 
+  genHistoricPool(event, pool)
 
   const poolTokenPositionId = user.concat(pool.underlying).concat(pool.id)
   let poolTokenPosition = PoolTokenPosition.load(poolTokenPositionId)
@@ -100,6 +101,20 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPositionHistoryItem.blockNumber = event.block.number
   poolTokenPositionHistoryItem.blockTimestamp = event.block.timestamp
   poolTokenPositionHistoryItem.save()
+}
+
+function genHistoricPool(event: Transfer, pool: Pool): void {
+  const poolHistoricItem = new PoolHistoricItem(event.address.concat(event.transaction.hash))
+  poolHistoricItem.pool = pool.id
+  poolHistoricItem.name = pool.name
+  poolHistoricItem.symbol = pool.symbol
+  poolHistoricItem.underlying = pool.underlying
+  poolHistoricItem.decimals = pool.decimals
+  poolHistoricItem.balance = pool.balance
+  poolHistoricItem.totalSupplied = pool.totalSupplied
+  poolHistoricItem.blockNumber = event.block.number
+  poolHistoricItem.blockTimestamp = event.block.timestamp
+  poolHistoricItem.save()
 }
 
 

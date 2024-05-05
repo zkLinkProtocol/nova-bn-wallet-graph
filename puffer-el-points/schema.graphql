@@ -15,6 +15,29 @@ type Pool @entity(immutable: false) {
   name: String!
 }
 
+type PoolHistoricItem @entity(immutable: false) {
+  # pool id + tx hash
+  id: Bytes!
+  # pool id
+  pool: Bytes!
+
+  underlying: Bytes!
+  # underlying  balance
+  decimals: BigInt!
+  # underlying  balance
+  balance: BigInt!
+  # total supplied
+  totalSupplied: BigInt!
+
+  symbol: String!
+
+  name: String!
+
+  blockNumber: BigInt!
+
+  blockTimestamp: BigInt!
+}
+
 type PoolTokenPosition @entity(immutable: false) {
   # user account + token address + poolId
   id: Bytes!
