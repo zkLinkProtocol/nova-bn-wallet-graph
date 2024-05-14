@@ -1,25 +1,26 @@
-/** viewed */
-
 import { MarketListed } from '../generated/LayerBank/LayerBankCore'
 import { LayerBankLToken, Transfer } from '../generated/templates/LayerBankLToken/LayerBankLToken'
 import { PoolTokenPosition, Pool } from '../generated/schema'
 import { LayerBankLToken as LayerBankLTokenTemplate } from '../generated/templates'
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts'
+import { Address, BigInt } from '@graphprotocol/graph-ts'
 import { setUserInvalid } from './general'
+import { fetchTokenSymbol } from './utils/tokenHelper'
 
 export function handleMarketListed(event: MarketListed): void {
     const gToken = event.params.gToken
+    const lToken = LayerBankLToken.bind(gToken)
+
     let pool = Pool.load(gToken)
     if (!pool) {
         pool = new Pool(gToken)
-        const lToken = LayerBankLToken.bind(gToken)
         pool.underlying = lToken.underlying()
         pool.decimals = BigInt.fromI32(lToken.decimals())
         pool.balance = lToken.getCash()
         pool.totalSupplied = lToken.totalSupply()
-        pool.symbol = Bytes.fromHexString(lToken.symbol())
+        pool.symbol = fetchTokenSymbol(lToken.underlying())
         pool.name = lToken.name()
         pool.save()
+
         LayerBankLTokenTemplate.create(gToken)
     }
 }
@@ -33,11 +34,16 @@ export function handleTransfer(event: Transfer): void {
     if (!pool) {
         pool = new Pool(event.address)
         pool.name = lToken.name()
-        pool.symbol = lToken.underlying()
+        pool.symbol = fetchTokenSymbol(underlying)
         pool.underlying = underlying
         pool.decimals = BigInt.fromI32(lToken.decimals())
         pool.balance = BigInt.zero()
         pool.totalSupplied = BigInt.zero()
+        pool.save()
+    } else {
+        pool.symbol = fetchTokenSymbol(underlying)
+        pool.underlying = underlying
+        pool.decimals = BigInt.fromI32(lToken.decimals())
         pool.save()
     }
     // update from to

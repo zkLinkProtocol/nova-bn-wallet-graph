@@ -1,10 +1,11 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts';
-import { ERC20 } from '../../generated/LayerBank/ERC20'
+import { ERC20 } from '../../generated/LayerBank/ERC20';
 import { ERC20BytesMethod } from '../../generated/LayerBank/ERC20BytesMethod';
-import { PresetTokenInfoHolder } from '../config';
-import { isNullEthValue } from './funcs';
-import { ADDRESS_ZERO } from './constants';
 
+
+export function isNullEthValue(value: string): boolean {
+    return value == '0x0000000000000000000000000000000000000000000000000000000000000001';
+}
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
     const contract = ERC20.bind(tokenAddress);
@@ -19,14 +20,9 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
             // for broken pairs that have no symbol function exposed
             if (!isNullEthValue(symbolResultBytes.value.toHexString())) {
                 symbolValue = symbolResultBytes.value.toString();
-            } else {
-                const tokenInfo = PresetTokenInfoHolder.getMapping().get(tokenAddress.toHexString());
-                if (tokenInfo !== null) {
-                    symbolValue = tokenInfo.symbol;
-                }
             }
         } else {
-            return ADDRESS_ZERO
+            return Address.zero().toHexString()
         }
     } else {
         symbolValue = symbolResult.value;
@@ -48,11 +44,6 @@ export function fetchTokenName(tokenAddress: Address): string {
             // for broken pairs that have no name function exposed
             if (!isNullEthValue(nameResultBytes.value.toHexString())) {
                 nameValue = nameResultBytes.value.toString();
-            } else {
-                const tokenInfo = PresetTokenInfoHolder.getMapping().get(tokenAddress.toHexString());
-                if (tokenInfo !== null) {
-                    nameValue = tokenInfo.name;
-                }
             }
         } else {
             return ''
@@ -70,19 +61,14 @@ export function fetchTokenTotalSupply(tokenAddress: Address): BigInt {
     return totalSupplyResult.value;
 }
 
-export function fetchTokenDecimals(tokenAddress: Address): BigInt {
+export function fetchTokenDecimals(tokenAddress: Address): BigInt | null {
     let contract = ERC20.bind(tokenAddress);
     // try types uint8 for decimals
     const decimalResult = contract.try_decimals();
     if (!decimalResult.reverted) {
         return BigInt.fromI32(decimalResult.value);
-    } else {
-        const tokenInfo = PresetTokenInfoHolder.getMapping().get(tokenAddress.toHexString());
-        if (tokenInfo !== null) {
-            return tokenInfo.decimals;
-        }
     }
-    return BigInt.fromString('18');
+    return null;
 }
 
 export function fetchTokenBalanceAmount(tokenAddress: string, ownerAddress: string): BigInt {

@@ -10,7 +10,7 @@ type Pool @entity(immutable: false) {
   # total supplied
   totalSupplied: BigInt!
 
-  symbol: Bytes!
+  symbol: String!
 
   name: String!
 }
