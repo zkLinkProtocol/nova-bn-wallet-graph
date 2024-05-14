@@ -8,6 +8,10 @@ export function isNullEthValue(value: string): boolean {
 }
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
+    if (tokenAddress.equals(Address.zero())) {
+        return "ETH"
+    }
+
     const contract = ERC20.bind(tokenAddress);
 
     // try types string and bytes32 for symbol
