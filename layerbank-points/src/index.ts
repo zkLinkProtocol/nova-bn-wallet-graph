@@ -3,8 +3,8 @@ import { LayerBankLToken, Transfer } from '../generated/templates/LayerBankLToke
 import { PoolTokenPosition, Pool } from '../generated/schema'
 import { LayerBankLToken as LayerBankLTokenTemplate } from '../generated/templates'
 import { Address, BigInt } from '@graphprotocol/graph-ts'
-import { setUserInvalid } from './general'
-import { fetchTokenSymbol } from './utils/tokenHelper'
+import { setUserInvalid, updateUserBalance } from './general'
+import { fetchTokenDecimals, fetchTokenSymbol } from './utils/tokenHelper'
 
 export function handleMarketListed(event: MarketListed): void {
     const gToken = event.params.gToken
@@ -14,7 +14,7 @@ export function handleMarketListed(event: MarketListed): void {
     if (!pool) {
         pool = new Pool(gToken)
         pool.underlying = lToken.underlying()
-        pool.decimals = BigInt.fromI32(lToken.decimals())
+        pool.decimals = fetchTokenDecimals(lToken.underlying())
         pool.balance = lToken.getCash()
         pool.totalSupplied = lToken.totalSupply()
         pool.symbol = fetchTokenSymbol(lToken.underlying())
@@ -36,14 +36,14 @@ export function handleTransfer(event: Transfer): void {
         pool.name = lToken.name()
         pool.symbol = fetchTokenSymbol(underlying)
         pool.underlying = underlying
-        pool.decimals = BigInt.fromI32(lToken.decimals())
+        pool.decimals = fetchTokenDecimals(underlying)
         pool.balance = BigInt.zero()
         pool.totalSupplied = BigInt.zero()
         pool.save()
     } else {
         pool.symbol = fetchTokenSymbol(underlying)
         pool.underlying = underlying
-        pool.decimals = BigInt.fromI32(lToken.decimals())
+        pool.decimals = fetchTokenDecimals(underlying)
         pool.save()
     }
     // update from to
@@ -58,6 +58,7 @@ export function handleTransfer(event: Transfer): void {
 }
 
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
+    updateUserBalance(user, BigInt.zero())
 
     const lToken = LayerBankLToken.bind(event.address)
     let poolBalance = lToken.getCash();

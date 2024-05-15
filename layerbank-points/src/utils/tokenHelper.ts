@@ -65,14 +65,17 @@ export function fetchTokenTotalSupply(tokenAddress: Address): BigInt {
     return totalSupplyResult.value;
 }
 
-export function fetchTokenDecimals(tokenAddress: Address): BigInt | null {
+export function fetchTokenDecimals(tokenAddress: Address): BigInt {
+    if (tokenAddress.equals(Address.zero())) {
+        return BigInt.fromI32(18)
+    }
     let contract = ERC20.bind(tokenAddress);
     // try types uint8 for decimals
     const decimalResult = contract.try_decimals();
     if (!decimalResult.reverted) {
         return BigInt.fromI32(decimalResult.value);
     }
-    return null;
+    return BigInt.fromI32(18)
 }
 
 export function fetchTokenBalanceAmount(tokenAddress: string, ownerAddress: string): BigInt {
