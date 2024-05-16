@@ -1,4 +1,9 @@
 specVersion: 1.0.0
+features:
+  - grafting
+graft:
+  base: "QmPfAfnMcY25js4Hux92vHQkxnY5Sq1eSUKHmyaAbdSeAC"
+  block: 1667805
 indexerHints:
   prune: auto
 schema:

@@ -4,12 +4,12 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "create": "graph create bn-wallet-verify --node http://localhost:8020",
-    "deploy": "graph deploy bn-wallet-verify  --ipfs http://localhost:5001 --node http://localhost:8020/",
-    "remove": "graph remove nova-bn-wallet --node http://localhost:8020",
-    "create-local": "graph create bn-wallet-verify --node http://3.114.68.110:8020",
-    "deploy-local": "graph deploy bn-wallet-verify --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
-    "remove-local": "graph remove bn-wallet-verify --node http://3.114.68.110:8020",
+    "create": "graph create bn-wallet-verify-v2 --node http://localhost:8020",
+    "deploy": "graph deploy bn-wallet-verify-v2  --ipfs http://localhost:5001 --node http://localhost:8020/",
+    "remove": "graph remove --node http://localhost:8020 bn-wallet-verify",
+    "create-local": "graph create bn-wallet-verify-v2 --node http://3.114.68.110:8020",
+    "deploy-local": "graph deploy bn-wallet-verify-v2 --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
+    "remove-local": "graph remove --node http://3.114.68.110:8020 bn-wallet-verify",
     "test": "graph test"
   },
   "dependencies": {
