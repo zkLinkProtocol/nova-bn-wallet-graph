@@ -4,4 +4,4 @@ import { BigInt } from "@graphprotocol/graph-ts"
 
 export const START_TIME = BigInt.fromString("1714024800")
 
-export const END_TIME = BigInt.fromString("1715817600") 
+export const END_TIME = BigInt.fromString("1716422340") 
