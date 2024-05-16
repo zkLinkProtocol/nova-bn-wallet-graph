@@ -1,4 +1,9 @@
 specVersion: 1.0.0
+features:
+  - grafting
+graft:
+  base: 'QmeEhnP3MJFDD4UAkRJrPU3WxBZFvUSH3mwGqGDohoEbt7'
+  block: 1643650
 schema:
   file: ./schema.graphql
 dataSources:
@@ -306,6 +311,33 @@ dataSources:
       abi: AquaVault
       address: '0x603871A4DDEA08B9375ff6339E319AE7932b640b'
       startBlock: 601388
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/aqua.ts
+      entities:
+        - UserPosition
+        - TokenPosition
+        - AquaCToken
+      abis:
+        - name: AquaVault
+          file: ./abis/AquaLpToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum
+    name: Aqua_WNMT
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x85f1858Da8ae9447e4Bb1b6721b4abCacFCde1c7'
+      startBlock: 1643659
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
