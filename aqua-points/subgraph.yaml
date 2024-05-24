@@ -3,7 +3,7 @@ features:
   - grafting
 graft:
   base: 'Qma92b3hE8p9UNwHfomUsAtfgR1KnoemCLwqZ7WKnaR9NP'
-  block: 1967700
+  block: 1967000
 schema:
   file: ./schema.graphql
 dataSources:
