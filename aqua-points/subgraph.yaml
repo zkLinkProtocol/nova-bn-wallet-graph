@@ -2,8 +2,8 @@ specVersion: 1.0.0
 features:
   - grafting
 graft:
-  base: 'QmeEhnP3MJFDD4UAkRJrPU3WxBZFvUSH3mwGqGDohoEbt7'
-  block: 1643650
+  base: 'Qma92b3hE8p9UNwHfomUsAtfgR1KnoemCLwqZ7WKnaR9NP'
+  block: 1967700
 schema:
   file: ./schema.graphql
 dataSources:
