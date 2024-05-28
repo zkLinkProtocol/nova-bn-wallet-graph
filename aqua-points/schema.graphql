@@ -1,36 +1,42 @@
-type AquaCToken @entity(immutable: false) {
-  # cToken id
+type Pool @entity(immutable: false) {
+  # pool id + token Address
+  id: Bytes!
+  # token address
+  underlying: Bytes!
+  # underlying  balance
+  decimals: BigInt!
+  # underlying  balance
+  balance: BigInt!
+  # total supplied
+  totalSupplied: BigInt!
+
+  symbol: String!
+
+  name: String!
+}
+
+type PoolTokenPosition @entity(immutable: false) {
+  # user account + token address + poolId
+  id: Bytes!
+  # token address
+  token: Bytes!
+  # pool id
+  pool: Bytes!
+  # total supply amount by user (used to calc the shared balance)
+  supplied: BigInt!
+  # pool name
+  poolName: String!
+  # user account
+  userPosition: UserPosition!
+}
+
+type UserPosition @entity(immutable: false) {
+  # account
   id: Bytes!
 
   balance: BigInt!
 
-  totalSupplied: BigInt!
+  validate: Boolean!
 
-  blockNumber: BigInt!
-}
-
-type UserPosition @entity(immutable: false) {
-  # account Address
-  id: Bytes!
-
-  positions: [TokenPosition!]! @derivedFrom(field: "userPosition")
-}
-
-type TokenPosition @entity(immutable: false) {
-  # user account + token address
-  id: Bytes!
-  # underlying token address
-  token: Bytes!
-  # pool address
-  pool: Bytes!
-  # underlying balance
-  supplied: BigInt!
-  # underlying token decimal
-  decimal: BigInt!
-  # user account
-  userPosition: UserPosition!
-  # hash
-  transactionHash: Bytes!
-  # block number
-  blockNumber: BigInt!
+  positions: [PoolTokenPosition!]! @derivedFrom(field: "userPosition")
 }
