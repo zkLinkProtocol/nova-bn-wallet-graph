@@ -1,0 +1,55 @@
+specVersion: 0.0.4
+description: Linkswap lp position
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LinkswapFactory
+    network: zklink-nova
+    source:
+      abi: LinkswapFactory
+      address: '0x87929083ac2215cF3CE4936857D314aF6687C978'
+      startBlock: 79192
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/index.ts
+      entities:
+        - Pool
+      abis:
+        - name: LinkswapFactory
+          file: ./abis/LinkswapFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handlePairCreated
+
+templates:
+  - kind: ethereum/contract
+    name: LinkSwap
+    network: zklink-nova
+    source:
+      abi: LinkSwapPair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/index.ts
+      entities:
+        - Pool
+        - PoolTokenPosition
+        - UserPosition
+      abis:
+        - name: LinkSwapPair
+          file: ./abis/LinkswapSwapPair.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

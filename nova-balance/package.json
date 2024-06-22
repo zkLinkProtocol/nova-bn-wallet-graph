@@ -4,12 +4,12 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "create": "graph create nova-balance-v2 --node http://localhost:8020",
-    "deploy": "graph deploy nova-balance  --ipfs http://localhost:5001 --node http://localhost:8020",
-    "remove": "graph remove --node http://localhost:8020 nova-balance",
-    "create-local": "graph create nova-balance-v2 --node http://3.114.68.110:8020",
-    "deploy-local": "graph deploy nova-balance-v2 --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
-    "remove-local": "graph remove --node http://3.114.68.110:8020 nova-balance",
+    "create": "graph create lxp-balance --node http://localhost:8020",
+    "deploy": "graph deploy lxp-balance  --ipfs http://localhost:5001 --node http://localhost:8020",
+    "remove": "graph remove --node http://localhost:8020 lxp-balance",
+    "create-local": "graph create lxp-balance --node http://3.114.68.110:8020",
+    "deploy-local": "graph deploy lxp-balance --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
+    "remove-local": "graph remove --node http://3.114.68.110:8020 lxp-balance",
     "test": "graph test"
   },
   "dependencies": {
