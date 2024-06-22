@@ -4,7 +4,7 @@ import { Pool, PoolTokenPosition } from "../generated/schema";
 import { Transfer, LinkSwapPair } from "../generated/templates/LinkSwap/LinkSwapPair";
 import { LinkSwap as LinkSwapTemplate } from '../generated/templates'
 import { fetchTokenBalanceAmount, fetchTokenDecimals, fetchTokenSymbol } from "./utils/tokenHelper";
-import { setUserInvalid } from "./general";
+import { setUserInvalid, updateUserBalance } from "./general";
 import { SPECIAL_ADDRESS } from "./constants";
 
 
@@ -50,6 +50,7 @@ export function handleTransfer(event: Transfer): void {
 }
 
 function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
+  updateUserBalance(user)
 
   const swapPair = LinkSwapPair.bind(event.address)
 
@@ -71,6 +72,3 @@ function updateTokenPosition(user: Address, event: Transfer, pool: Pool): void {
   poolTokenPosition.userPosition = user
   poolTokenPosition.save()
 }
-
-
-
