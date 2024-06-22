@@ -1,0 +1,23 @@
+{
+  "name": "zk_l3_graph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "create": "graph create nova-balance-v2 --node http://localhost:8020",
+    "deploy": "graph deploy nova-balance  --ipfs http://localhost:5001 --node http://localhost:8020",
+    "remove": "graph remove --node http://localhost:8020 nova-balance",
+    "create-local": "graph create nova-balance-v2 --node http://3.114.68.110:8020",
+    "deploy-local": "graph deploy nova-balance-v2 --ipfs http://3.114.68.110:5001 --node http://3.114.68.110:8020",
+    "remove-local": "graph remove --node http://3.114.68.110:8020 nova-balance",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.68.5",
+    "@graphprotocol/graph-ts": "0.35.1",
+    "prettier": "^3.2.5"
+  },
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
+}

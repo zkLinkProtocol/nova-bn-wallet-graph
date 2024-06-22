@@ -1,0 +1,14 @@
+type Balance @entity(immutable: false) {
+  # user account + token address
+  id: Bytes!
+  # token address
+  userAddress: Bytes!
+  # token address
+  tokenAddress: Bytes!
+  # token balance
+  balance: BigInt!
+  # # token symbol
+  # symbol: String!
+  # # token decimals
+  # decimals: BigInt!
+}
