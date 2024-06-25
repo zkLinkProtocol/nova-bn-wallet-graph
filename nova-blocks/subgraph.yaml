@@ -1,0 +1,24 @@
+specVersion: 0.0.4
+description: index user's balance
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Block
+    network: zklink-nova
+    source:
+      abi: L2EthTokenABI
+      address: '0x000000000000000000000000000000000000800A'
+      startBlock: 0
+    mapping:
+      kind: ethereum/blocks
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/index.ts
+      entities:
+        - Block
+      abis:
+        - name: L2EthTokenABI
+          file: ./abis/L2EthToken.json
+      blockHandlers:
+        - handler: handleBlock
