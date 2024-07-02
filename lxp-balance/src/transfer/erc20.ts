@@ -2,18 +2,18 @@ import { Address, BigInt, log } from '@graphprotocol/graph-ts'
 import { Transfer } from '../../generated/ezETH_Linea/ERC20'
 import { Balance } from '../../generated/schema'
 import { SPECIAL_ADDRESS } from '../constants'
-// import { fetchTokenDecimals, fetchTokenSymbol } from '../helper'
+import { fetchTokenDecimals, fetchTokenSymbol } from '../helper'
 
 function updateUserBalance(user: Address, updatedToken: Address, balance: BigInt): void {
     let tokenBalance = Balance.load(user.concat(updatedToken))
     if (!tokenBalance) {
         tokenBalance = new Balance(user.concat(updatedToken))
+        tokenBalance.decimals = fetchTokenDecimals(Address.fromBytes(updatedToken))
+        tokenBalance.symbol = fetchTokenSymbol(Address.fromBytes(updatedToken))
+        tokenBalance.tokenAddress = updatedToken
+        tokenBalance.userAddress = user
     }
     tokenBalance.balance = balance
-    tokenBalance.tokenAddress = updatedToken
-    tokenBalance.userAddress = user
-    // tokenBalance.decimals = fetchTokenDecimals(Address.fromBytes(updatedToken))
-    // tokenBalance.symbol = fetchTokenSymbol(Address.fromBytes(updatedToken))
     tokenBalance.save()
     log.info('updateUserBalance: {}, {}, {}', [user.toHexString(), updatedToken.toHexString(), balance.toString()])
 }

@@ -5,16 +5,16 @@ import { SPECIAL_ADDRESS } from '../constants'
 import { Balance } from '../../generated/schema'
 
 export function updateUserETHBalance(user: Address, updatedToken: Address, balance: BigInt): void {
-    // const L2EthContract = L2EthTokenABI.bind(Address.fromBytes(updatedToken))
+    const L2EthContract = L2EthTokenABI.bind(Address.fromBytes(updatedToken))
     let tokenBalance = Balance.load(user.concat(updatedToken))
     if (!tokenBalance) {
         tokenBalance = new Balance(user.concat(updatedToken))
+        tokenBalance.tokenAddress = updatedToken
+        tokenBalance.userAddress = user
+        tokenBalance.decimals = BigInt.fromI32(L2EthContract.try_decimals().value)
+        tokenBalance.symbol = L2EthContract.try_symbol().value
     }
     tokenBalance.balance = balance
-    tokenBalance.tokenAddress = updatedToken
-    tokenBalance.userAddress = user
-    // tokenBalance.decimals = BigInt.fromI32(L2EthContract.try_decimals().value)
-    // tokenBalance.symbol = L2EthContract.try_symbol().value
     tokenBalance.save()
     log.info('updateUserBalance: {}, {}, {}', [user.toHexString(), updatedToken.toHexString(), balance.toString()])
 }
@@ -26,10 +26,12 @@ export function handleL2EthTransfer(event: Transfer): void {
         return
     }
     const toTokenBalance = Balance.load(to.concat(event.address))
+
     const newToTokenBalance = toTokenBalance ? toTokenBalance.balance.plus(event.params.value) : event.params.value
     if (!SPECIAL_ADDRESS.includes(to)) {
         log.info('handleL2EthTransfer: {}, {}', [to.toHexString(), event.block.number.toString()])
         updateUserETHBalance(to, event.address, newToTokenBalance)
+
     }
 
     const fromTokenBalance = Balance.load(from.concat(event.address))

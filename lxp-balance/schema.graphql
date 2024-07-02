@@ -8,7 +8,7 @@ type Balance @entity(immutable: false) {
   # token balance
   balance: BigInt!
   # # token symbol
-  # symbol: String!
+  symbol: String!
   # # token decimals
-  # decimals: BigInt!
+  decimals: BigInt!
 }
