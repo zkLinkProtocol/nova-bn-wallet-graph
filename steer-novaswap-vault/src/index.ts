@@ -1,17 +1,18 @@
 
 import { Vault, Share } from '../generated/schema'
-import { MultiPositionLiquidityManager } from '../generated/templates'
+import { MultiPositionLiquidityManager as MultiPositionLiquidityManagerTemplate } from '../generated/templates'
 import { VaultCreated } from '../generated/SteerProtocol/VaultRegistry'
-import { Deposit, Withdraw } from '../generated/SteerProtocol/MultiPositionLiquidityManager'
+import { Deposit, Withdraw, MultiPositionLiquidityManager } from '../generated/SteerProtocol/MultiPositionLiquidityManager'
 import { BigInt } from '@graphprotocol/graph-ts'
 
 export function handleVaultCreated(event: VaultCreated): void {
     const vaultAddress = event.params.vault
-
+    const multiPositionLiquidityManager = MultiPositionLiquidityManager.bind(vaultAddress)
     const vaultInstance = new Vault(vaultAddress)
     vaultInstance.totalSupply = BigInt.zero()
+    vaultInstance.pool = multiPositionLiquidityManager.pool()
     vaultInstance.save()
-    MultiPositionLiquidityManager.create(vaultAddress)
+    MultiPositionLiquidityManagerTemplate.create(vaultAddress)
 }
 
 export function handleDeposit(event: Deposit): void {
