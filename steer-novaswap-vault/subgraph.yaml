@@ -1,0 +1,48 @@
+specVersion: 1.0.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SteerProtocol
+    network: zklink-nova
+    source:
+      abi: VaultRegistry
+      address: '0xFB3b5b859B08Dc86fDA0aF9332E5Ca4cF6689d66'
+      startBlock: 4425089
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/index.ts
+      entities:
+        - Vault
+      abis:
+        - name: VaultRegistry
+          file: ./abis/VaultRegistry.json
+        - name: MultiPositionLiquidityManager
+          file: ./abis/MultiPositionLiquidityManager.json
+      eventHandlers:
+        - event: VaultCreated(address,address,string,indexed uint256,address)
+          handler: handleVaultCreated
+
+templates:
+  - kind: ethereum/contract
+    name: MultiPositionLiquidityManager
+    network: zklink-nova
+    source:
+      abi: MultiPositionLiquidityManager
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/index.ts
+      entities:
+        - Vault
+      abis:
+        - name: MultiPositionLiquidityManager
+          file: ./abis/MultiPositionLiquidityManager.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleWithdraw

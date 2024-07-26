@@ -1,0 +1,24 @@
+type Vault @entity(immutable: false) {
+  # vault address
+  id: Bytes!
+
+  # novaswap pool address
+  pool: Bytes!
+
+  # total shares
+  totalSupply: BigInt!
+
+  # shares
+  shares: [Share!]! @derivedFrom(field: "vault")
+}
+
+type Share @entity(immutable: false) {
+  # user address
+  id: Bytes!
+
+  # vault
+  vault: Vault!
+
+  # user shares
+  sharesAmount: BigInt!
+}
