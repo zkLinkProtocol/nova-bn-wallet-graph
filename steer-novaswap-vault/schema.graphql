@@ -5,6 +5,8 @@ type Vault @entity(immutable: false) {
   # novaswap pool address
   pool: Bytes!
 
+  state: Int!
+
   # total shares
   totalSupply: BigInt!
 
