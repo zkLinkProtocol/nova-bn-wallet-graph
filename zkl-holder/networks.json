@@ -1,0 +1,8 @@
+{
+  "mainnet": {
+    "ZkLinkToken": {
+      "address": "0xE1eB6407c155296b215C3AAaabc916dA4253bC9d",
+      "startBlock": 19639758
+    }
+  }
+}

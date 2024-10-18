@@ -1,0 +1,47 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ZkLinkToken
+    network: mainnet
+    source:
+      address: "0xE1eB6407c155296b215C3AAaabc916dA4253bC9d"
+      abi: ZkLinkToken
+      startBlock: 19639758
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - Approval
+        - BeaconUpgraded
+        - EIP712DomainChanged
+        - Initialized
+        - OwnershipTransferred
+        - Transfer
+        - Upgraded
+      abis:
+        - name: ZkLinkToken
+          file: ./abis/ZkLinkToken.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: EIP712DomainChanged()
+          handler: handleEIP712DomainChanged
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/zk-link-token.ts
