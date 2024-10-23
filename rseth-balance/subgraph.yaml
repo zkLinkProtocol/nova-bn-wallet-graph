@@ -1,0 +1,184 @@
+specVersion: 1.2.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Aqua
+    network: zklink-nova
+    source:
+      abi: AquaVault
+      address: '0x4AC97E2727B0e92AE32F5796b97b7f98dc47F059'
+      startBlock: 452
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/protocol/aqua.ts
+      entities:
+        - Pool
+        - LiquidityPosition
+      abis:
+        - name: AquaVault
+          file: ./abis/AquaVault.json
+        - name: AquaLpToken
+          file: ./abis/AquaLpToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: MarketListed(address)
+          handler: handleMarketListed
+
+  - kind: ethereum
+    name: Shoebill
+    network: zklink-nova
+    source:
+      abi: ShoebillUnitroller
+      address: '0x89e348e0ab4D83aEDbf1354004552822a805a12e'
+      startBlock: 2335136
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/protocol/shoebill.ts
+      entities:
+        - Pool
+        - LiquidityPosition
+      abis:
+        - name: ShoebillUnitroller
+          file: ./abis/ShoebillUnitroller.json
+        - name: ShoebillSbToken
+          file: ./abis/ShoebillSbToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: MarketListed(address)
+          handler: handleMarketListed
+
+  # - kind: ethereum
+  #   name: L2EthToken
+  #   network: zklink-nova
+  #   source:
+  #     abi: L2EthTokenABI
+  #     address: '0x000000000000000000000000000000000000800A'
+  #     startBlock: 1
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.9
+  #     language: wasm/assemblyscript
+  #     file: ./src/transfer/eth.ts
+  #     entities:
+  #       - Balance
+  #       - UserPosition
+  #     abis:
+  #       - name: L2EthTokenABI
+  #         file: ./abis/L2EthToken.json
+  #       - name: ERC20BytesMethod
+  #         file: ./abis/ERC20BytesMethod.json
+  #     eventHandlers:
+  #       - event: Transfer(indexed address,indexed address,uint256)
+  #         handler: handleL2EthTransfer
+  #       - event: Mint(indexed address,uint256)
+  #         handler: handleL2EthMint
+
+  - kind: ethereum
+    name: rsETH_eth
+    network: zklink-nova
+    source:
+      abi: ERC20
+      address: '0x186c0c42C617f1Ce65C4f7DF31842eD7C5fD8260'
+      startBlock: 191
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/transfer/erc20.ts
+      entities:
+        - Balance
+        - UserPosition
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleERC20Transfer
+
+  - kind: ethereum
+    name: rsETH_arb
+    network: zklink-nova
+    source:
+      abi: ERC20
+      address: '0x4A2da287deB06163fB4D77c52901683d69bD06f4'
+      startBlock: 25835
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/transfer/erc20.ts
+      entities:
+        - Balance
+        - UserPosition
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleERC20Transfer
+
+templates:
+  - kind: ethereum/contract
+    name: AquaLpToken
+    network: zklink-nova
+    source:
+      abi: AquaLpToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/protocol/aqua.ts
+      entities:
+        - Pool
+        - LiquidPosition
+        - UserPosition
+      abis:
+        - name: AquaLpToken
+          file: ./abis/AquaLpToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum/contract
+    name: ShoebillSbToken
+    network: zklink-nova
+    source:
+      abi: ShoebillSbToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/protocol/shoebill.ts
+      entities:
+        - Pool
+        - LiquidPosition
+        - UserPosition
+      abis:
+        - name: ShoebillSbToken
+          file: ./abis/ShoebillSbToken.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20BytesMethod
+          file: ./abis/ERC20BytesMethod.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

@@ -1,0 +1,59 @@
+type Pool @entity(immutable: false) {
+  # lp address
+  id: Bytes!
+  # token address
+  underlying: Bytes!
+  # underlying  balance
+  decimals: BigInt!
+  # underlying  balance
+  balance: BigInt!
+  # total supplied
+  totalSupplied: BigInt!
+
+  symbol: String!
+
+  name: String!
+}
+
+type LiquidityPosition @entity(immutable: false) {
+  # user account + token address + poolId
+  id: Bytes!
+  # token address
+  token: Bytes!
+  # pool id
+  pool: Pool
+  # total supply amount by user (used to calc the shared balance)
+  supplied: BigInt!
+  # pool name
+  poolName: String!
+  # user account
+  userPosition: UserPosition!
+}
+
+type Balance @entity(immutable: false) {
+  # user account + token address
+  id: Bytes!
+  # token address
+  userAddress: Bytes!
+  # token address
+  tokenAddress: Bytes!
+  # token balance
+  balance: BigInt!
+  # # token symbol
+  symbol: String!
+  # # token decimals
+  decimals: BigInt!
+  # user account
+  userPosition: UserPosition!
+}
+
+type UserPosition @entity(immutable: false) {
+  # account
+  id: Bytes!
+
+  balances: [Balance!]! @derivedFrom(field: "userPosition")
+
+  liquidityPositions: [LiquidityPosition!]! @derivedFrom(field: "userPosition")
+
+  valid: Boolean!
+}
