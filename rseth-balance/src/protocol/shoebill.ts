@@ -9,10 +9,11 @@ import { ADDRESS_ZERO } from '../constants'
 
 export function handleMarketListed(event: MarketListed): void {
     const gToken = event.params.gToken;
+    setUserInvalid(gToken)
+
     let pool = Pool.load(Bytes.fromHexString(gToken.toHexString()));
     const lToken = ShoebillSbToken.bind(gToken);
     const underlying = lToken.try_underlying();
-
     const symbol = underlying.reverted ? 'ETH' : fetchTokenSymbol(underlying.value);
 
     if (!pool) {

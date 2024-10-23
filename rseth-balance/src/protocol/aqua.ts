@@ -9,6 +9,7 @@ import { fetchTokenDecimals, fetchTokenSymbol } from '../utils/tokenHelper'
 export function handleMarketListed(event: MarketListed): void {
     const cToken = event.params.cToken
     const cTokenContract = AquaLpToken.bind(cToken)
+    setUserInvalid(cToken)
 
     let pool = Pool.load(cToken)
     if (!pool) {
